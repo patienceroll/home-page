@@ -1,23 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Img from "@src/assets/1.jpg";
+import Layout from "@src/layout/layout";
 
-import url from "@public/back-ground.svg";
-
-import style from "./app.module.less";
-
-import "./app.less";
+import "./global.less";
 
 const App = () => {
-    return (
-        <div className={style.b}>
-            123
-            <div className="a">456</div>
-            <img src={Img} alt="" />
-            <img src={url} />
-        </div>
-    );
+    return <Layout />;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
