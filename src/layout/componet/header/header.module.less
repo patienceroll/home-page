@@ -1,3 +1,39 @@
+@import "../../../theme/theme.less";
+
 .header_container {
     height: 60px;
+}
+
+.nav_icon_container {
+    display: flex;
+    height: 100%;
+    .nav_icon {
+        display: flex;
+        align-items: center;
+    }
+
+    ul {
+        position: relative;
+        height: 28px;
+        width: 18px;
+        overflow: hidden;
+        li {
+            width: 18px;
+            height: 2px;
+            background-color: @font_nomal;
+            position: absolute;
+        }
+        li:nth-child(1) {
+            top: 7.33333333px;
+        }
+        li:nth-child(2) {
+            top: 14.66666666px;
+        }
+        li:nth-child(3) {
+            top: 22px;
+        }
+        li:nth-child(4) {
+            top: 29.33333333px;
+        }
+    }
 }

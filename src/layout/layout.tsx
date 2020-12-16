@@ -4,6 +4,8 @@ import Header from "./componet/header/header";
 import Menu from "./componet/menu/menu";
 import Search from "./componet/search/search";
 
+import "../global.less";
+
 const Layout: React.FC = () => {
     const onClickMenu = useCallback(() => {
         console.log("点击菜单按钮");
