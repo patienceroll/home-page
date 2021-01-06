@@ -1,18 +1,31 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 
 import style from "./header.module.less";
 
 export type HeaderProps = {
     /** 点击菜单icon */
-    onClickMenu: () => void;
+    onClickMenu: (clicked: boolean) => void;
     /** 点击搜索icon */
     onClickSearch: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({}) => {
+const Header: React.FC<HeaderProps> = ({ onClickMenu }) => {
+    const [clicked, setClicked] = useState(false);
+
+    const onClickNavIcon = () => {
+        setClicked(clicked => !clicked);
+    };
+
+    useEffect(() => {
+        onClickMenu(clicked);
+    }, [clicked]);
+
     return (
         <div className={style.header_container}>
-            <div className={style.nav_icon_container}>
+            <div
+                onClick={onClickNavIcon}
+                className={`${style.nav_icon_container} ${clicked ? style.clicked : ""}`}
+            >
                 <div className={style.nav_icon}>
                     {/* 导航按钮 */}
                     <ul>
@@ -25,6 +38,8 @@ const Header: React.FC<HeaderProps> = ({}) => {
 
                 <div className={style.nav_text}>导航</div>
             </div>
+
+            <div className={style.header_title}>Patience Drinking Dream Every Day</div>
         </div>
     );
 };
