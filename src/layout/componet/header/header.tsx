@@ -1,5 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 
+import HOME_SVG from "@src/assets/svg/home.svg";
+
 import style from "./header.module.less";
 
 export type HeaderProps = {
@@ -36,10 +38,15 @@ const Header: React.FC<HeaderProps> = ({ onClickMenu }) => {
                     </ul>
                 </div>
 
-                <div className={style.nav_text}>导航</div>
+                <div className={`${style.nav_text} waggle_animate`}>导航</div>
             </div>
 
             <div className={style.header_title}>Patience Drinking Dream Every Day</div>
+
+            <div className={`${style.about_me} shake_animate`}>
+                <img src={HOME_SVG} alt="" />
+                <span>关于</span>
+            </div>
         </div>
     );
 };

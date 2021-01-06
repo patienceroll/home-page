@@ -7,6 +7,7 @@ import Search from "./componet/search/search";
 import { ShowNavList } from "@src/context/context";
 
 import "../global.less";
+import "@src/animate/animate.less";
 
 const Layout: React.FC = () => {
     const [showNavList, setShowNavList] = useState(false);
