@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import Header from "./componet/header/header";
 import Menu from "./componet/menu/menu";
-import Search from "./componet/search/search";
+import About from "./componet/about/about";
 
 import { LayoutContext } from "@src/context/context";
 
@@ -32,7 +32,7 @@ const Layout: React.FC = () => {
                     <BrowserRouter>
                         <Menu />
 
-                        <Search />
+                        <About />
                     </BrowserRouter>
                 </div>
             </div>
