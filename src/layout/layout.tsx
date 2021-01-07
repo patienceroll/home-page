@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Header from "./componet/header/header";
 import Menu from "./componet/menu/menu";
@@ -10,21 +10,23 @@ import "../global.less";
 import "@src/animate/animate.less";
 
 const Layout: React.FC = () => {
-    const [showNavList, setShowNavList] = useState(false);
+    /** 是否显示菜单 */
+    const [showNav, setShowNav] = useState(false);
+    /** 是否显示关于 */
+    const [showAbout, setShowAbout] = useState(false);
 
-    const onClickMenu = useCallback(clicked => {
-        console.log("点击菜单按钮", clicked);
-    }, []);
+    useEffect(() => {
+        if (showAbout) setShowNav(false);
+    }, [showAbout]);
 
-    const onClickSearch = () =>
-        useCallback(() => {
-            console.log("点击搜索按钮");
-        }, []);
+    useEffect(() => {
+        if (showNav) setShowAbout(false);
+    }, [showNav]);
 
     return (
-        <ShowNavList.Provider value={{ setShowNavList, state: showNavList }}>
+        <ShowNavList.Provider value={{ setShowNav, setShowAbout, state: { showAbout, showNav } }}>
             <div>
-                <Header onClickMenu={onClickMenu} onClickSearch={onClickSearch} />
+                <Header />
                 <div>
                     <Menu />
 

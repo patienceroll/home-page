@@ -1,32 +1,31 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useContext } from "react";
 
 import HOME_SVG from "@src/assets/svg/home.svg";
 
+import { ShowNavList } from "@src/context/context";
+
 import style from "./header.module.less";
 
-export type HeaderProps = {
-    /** 点击菜单icon */
-    onClickMenu: (clicked: boolean) => void;
-    /** 点击搜索icon */
-    onClickSearch: () => void;
-};
-
-const Header: React.FC<HeaderProps> = ({ onClickMenu }) => {
-    const [clicked, setClicked] = useState(false);
+const Header: React.FC = () => {
+    const {
+        setShowAbout,
+        setShowNav,
+        state: { showNav },
+    } = useContext(ShowNavList);
 
     const onClickNavIcon = () => {
-        setClicked(clicked => !clicked);
+        setShowNav(isShow => !isShow);
     };
 
-    useEffect(() => {
-        onClickMenu(clicked);
-    }, [clicked]);
+    const onClickAboutContain = () => {
+        setShowAbout(isShow => !isShow);
+    };
 
     return (
         <div className={style.header_container}>
             <div
                 onClick={onClickNavIcon}
-                className={`${style.nav_icon_container} ${clicked ? style.clicked : ""}`}
+                className={`${style.nav_icon_container} ${showNav ? style.clicked : ""}`}
             >
                 <div className={style.nav_icon}>
                     {/* 导航按钮 */}
@@ -43,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ onClickMenu }) => {
 
             <div className={style.header_title}>Patience Drinking Dream Every Day</div>
 
-            <div className={`${style.about_me} shake_animate`}>
+            <div onClick={onClickAboutContain} className={`${style.about_me} shake_animate`}>
                 <img src={HOME_SVG} alt="" />
                 <span>关于</span>
             </div>
