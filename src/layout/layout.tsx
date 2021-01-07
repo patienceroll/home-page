@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import Header from "./componet/header/header";
 import Menu from "./componet/menu/menu";
 import Search from "./componet/search/search";
 
-import { ShowNavList } from "@src/context/context";
+import { LayoutContext } from "@src/context/context";
 
 import "../global.less";
 import "@src/animate/animate.less";
@@ -24,16 +25,18 @@ const Layout: React.FC = () => {
     }, [showNav]);
 
     return (
-        <ShowNavList.Provider value={{ setShowNav, setShowAbout, state: { showAbout, showNav } }}>
+        <LayoutContext.Provider value={{ setShowNav, setShowAbout, state: { showAbout, showNav } }}>
             <div>
                 <Header />
                 <div>
-                    <Menu />
+                    <BrowserRouter>
+                        <Menu />
 
-                    <Search />
+                        <Search />
+                    </BrowserRouter>
                 </div>
             </div>
-        </ShowNavList.Provider>
+        </LayoutContext.Provider>
     );
 };
 

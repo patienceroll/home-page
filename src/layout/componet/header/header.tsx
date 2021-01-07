@@ -2,7 +2,7 @@ import React, { memo, useContext } from "react";
 
 import HOME_SVG from "@src/assets/svg/home.svg";
 
-import { ShowNavList } from "@src/context/context";
+import { LayoutContext } from "@src/context/context";
 
 import style from "./header.module.less";
 
@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         setShowAbout,
         setShowNav,
         state: { showNav },
-    } = useContext(ShowNavList);
+    } = useContext(LayoutContext);
 
     const onClickNavIcon = () => {
         setShowNav(isShow => !isShow);
@@ -42,9 +42,11 @@ const Header: React.FC = () => {
 
             <div className={style.header_title}>Patience Drinking Dream Every Day</div>
 
-            <div onClick={onClickAboutContain} className={`${style.about_me} shake_animate`}>
-                <img src={HOME_SVG} alt="" />
-                <span>关于</span>
+            <div className={style.about_me_contain}>
+                <div onClick={onClickAboutContain} className={`${style.about_me} shake_animate`}>
+                    <img src={HOME_SVG} alt="" />
+                    <span>关于</span>
+                </div>
             </div>
         </div>
     );
