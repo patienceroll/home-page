@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 
 import Header from "./componet/header/header";
 import Menu from "./componet/menu/menu";
+import Page from "./componet/page/page";
 import About from "./componet/about/about";
 
 import { LayoutContext } from "@src/context/context";
@@ -29,11 +30,9 @@ const Layout: React.FC = () => {
             <div>
                 <Header />
                 <div>
-                    <BrowserRouter>
-                        <Menu />
-
-                        <About />
-                    </BrowserRouter>
+                    <Menu />
+                    <Page />
+                    <About />
                 </div>
             </div>
         </LayoutContext.Provider>

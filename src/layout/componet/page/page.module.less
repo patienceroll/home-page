@@ -1,0 +1,33 @@
+@import "../../../theme/theme.less";
+
+.mask {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, z-index 0.3s linear;
+    background-color: #000;
+    opacity: 0.1;
+    width: 100vw;
+    height: calc(100vh - 60px);
+}
+
+.mask_show {
+    z-index: 10;
+    opacity: 0.5;
+}
+
+.contain {
+    width: 100vw;
+    min-height: calc(100vh - 60px);
+    background-color: #f2f2f2;
+    transition: transform 0.3s ease;
+}
+
+.swipe_left {
+    transform: translateX(-110px);
+}
+
+.swipe_right {
+    transform: translateX(110px);
+}

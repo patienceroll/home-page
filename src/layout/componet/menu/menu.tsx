@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { LayoutContext } from "@src/context/context";
 
+import RouteData from "@src/route/route";
+
 import style from "./menu.module.less";
 
 const Menu: React.FC = () => {
@@ -12,7 +14,11 @@ const Menu: React.FC = () => {
 
     return (
         <div className={`${style.contain} ${showNav ? "" : style.hide}`}>
-            <div>相册</div>
+            {RouteData.map(item => (
+                <Link {...(item.props || {})} to={item.to}>
+                    <div> {item.name}</div>
+                </Link>
+            ))}
         </div>
     );
 };
