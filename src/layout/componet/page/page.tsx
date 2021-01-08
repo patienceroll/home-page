@@ -1,5 +1,5 @@
 import React, { memo, useContext } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 
 import RouteData from "@src/route/route";
 
@@ -26,7 +26,12 @@ const Page: React.FC = memo(() => {
                     showNav ? style.swipe_right : ""
                 }`}
             >
-                134813764826666666666666666666666666666666666666666666666666666
+                <Switch>
+                    <Redirect exact from="/" to="/home" />
+                    {RouteData.map(item => (
+                        <Route path={item.RouteProps.path}>{<item.component />}</Route>
+                    ))}
+                </Switch>
             </div>
 
             <div
