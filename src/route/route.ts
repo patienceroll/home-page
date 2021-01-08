@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { LinkProps, RouteProps } from "react-router-dom";
 
 import Home from "@src/page/home/home";
