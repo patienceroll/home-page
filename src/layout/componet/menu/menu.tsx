@@ -15,8 +15,8 @@ const Menu: React.FC = () => {
     return (
         <div className={`${style.contain} ${showNav ? "" : style.hide}`}>
             {RouteData.map(item => (
-                <Link {...(item.props || {})} to={item.to}>
-                    <div> {item.name}</div>
+                <Link className={style.link} {...(item.props || {})} to={item.to}>
+                    <div>{item.name}</div>
                 </Link>
             ))}
         </div>
