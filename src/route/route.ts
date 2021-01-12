@@ -4,7 +4,7 @@ import { LinkProps, RouteProps } from "react-router-dom";
 import Home from "@src/page/home/home";
 import PhotoCenter from "@src/page/photo-center/photo-center";
 import StudyCenter from "@src/page/study-center/study-center";
-import Convas from "@src/page/convas/convas";
+import canvas from "@src/page/canvas/canvas";
 
 type RouteTypeItem = {
     name: string;
@@ -34,10 +34,10 @@ const RouteData: RouteTypeItem[] = [
         RouteProps: { path: "/study-center" },
     },
     {
-        name: "Convas",
-        to: "/convas-center",
-        component: Convas,
-        RouteProps: { path: "/convas-center" },
+        name: "canvas",
+        to: "/canvas-center",
+        component: canvas,
+        RouteProps: { path: "/canvas-center" },
     },
 ];
 

@@ -1,3 +1,4 @@
+/** 抖动 */
 @keyframes shake {
     0% {
         transform: translate(0);
@@ -26,6 +27,7 @@
     animation-iteration-count: infinite;
 }
 
+/** 左右摇摆 */
 @keyframes waggle {
     0% {
         transform: translateX(2px);
@@ -51,4 +53,14 @@
     animation-name: waggle;
     animation-duration: 300ms;
     animation-timing-function: ease-in-out;
+}
+
+/** 从左向右滑动 */
+@keyframes slide_l_to_r {
+    from {
+        transform: translateX(-120%);
+    }
+    to {
+        transform: translateX(120%);
+    }
 }

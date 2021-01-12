@@ -3,13 +3,14 @@
 .contain {
     width: 220px;
     transition: left 0.5s ease;
+    background-color: #fff;
     height: calc(100vh - 60px);
-    background-color: #ccc;
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 99;
     padding: 40px 20px;
+    overflow: hidden;
 }
 
 .hide {
@@ -31,9 +32,20 @@
     content: "";
     height: 1px;
     width: 80%;
-    background-color: @border_color;
+    background-color: #999;
 }
 
-.link:hover {
+.link:hover,
+.link_current {
     transform: translateX(20px) scale(1.1);
+}
+
+.link:hover::after {
+    width: 100%;
+    :global {
+        animation-name: slide_l_to_r;
+    }
+    animation-duration: 2000ms;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }

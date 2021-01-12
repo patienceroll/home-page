@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { BrowserRouter } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Header from "./componet/header/header";
 import Menu from "./componet/menu/menu";
@@ -12,6 +12,8 @@ import "../global.less";
 import "@src/animate/animate.less";
 
 const Layout: React.FC = () => {
+    const { pathname } = useLocation();
+
     /** 是否显示菜单 */
     const [showNav, setShowNav] = useState(false);
     /** 是否显示关于 */
@@ -24,6 +26,11 @@ const Layout: React.FC = () => {
     useEffect(() => {
         if (showNav) setShowAbout(false);
     }, [showNav]);
+
+    useEffect(() => {
+        setShowAbout(false);
+        setShowNav(false);
+    }, [pathname]);
 
     return (
         <LayoutContext.Provider value={{ setShowNav, setShowAbout, state: { showAbout, showNav } }}>
