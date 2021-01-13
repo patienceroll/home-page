@@ -4,16 +4,20 @@
     position: fixed;
     top: 60px;
     left: 0;
-    z-index: -1;
-    transition: opacity 0.3s ease, z-index 0.3s linear;
+    visibility: hidden;
+    // 隐藏的时候,300ms后隐藏,透明度ease变化
+    transition: opacity 0.3s ease 0ms, visibility 0s ease 400ms;
     background-color: #000;
-    opacity: 0.1;
+    opacity: 0;
     width: 100vw;
     height: calc(100vh - 60px);
 }
 
 .mask_show {
-    z-index: 10;
+    // 显示的时候,立即显示,透明度ease变化
+    transition: opacity 0.3s ease 0ms, visibility 0s ease;
+    visibility: visible;
+    z-index: 1;
     opacity: 0.5;
 }
 
