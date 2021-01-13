@@ -40,7 +40,6 @@ const Layout: React.FC = () => {
                 <Header />
 
                 <div>
-                    <div className={style.header_placeholder} />
                     <Menu />
                     <Page />
                     <About />

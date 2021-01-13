@@ -20,7 +20,7 @@ const Page: React.FC = memo(() => {
     };
 
     return (
-        <div>
+        <div className={style.page_container}> 
             <div
                 className={`${style.contain} ${showAbout ? style.swipe_left : ""} ${
                     showNav ? style.swipe_right : ""
