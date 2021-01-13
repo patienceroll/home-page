@@ -1,4 +1,4 @@
-import { Configuration, loader } from "webpack";
+import webpack, { Configuration, loader } from "webpack";
 import path from "path";
 import LoaderUtils from "loader-utils";
 
@@ -7,7 +7,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 
-const FileNameType = "[name]-[hash]";
+const FileNameType = "[name]-[contenthash:8]";
 
 const config: Configuration = {
     entry: "./src/app.tsx",
@@ -88,15 +88,6 @@ const config: Configuration = {
     plugins: [
         // 删除输出目录
         new CleanWebpackPlugin({}),
-        // 输出 index.html 文件
-        new HtmlWebpackPlugin({
-            template: "public/index.html",
-        }),
-        // 分理出 css 文件
-        new MiniCssExtractPlugin({
-            filename: FileNameType + ".css",
-            chunkFilename: FileNameType + ".css",
-        }),
         // 复制文件夹
         new CopyWebpackPlugin({
             patterns: [
@@ -112,7 +103,48 @@ const config: Configuration = {
                 },
             ],
         }),
+        // 输出 index.html 文件
+        new HtmlWebpackPlugin({
+            template: "public/index.html",
+        }),
+        // 分理出 css 文件
+        new MiniCssExtractPlugin({
+            filename: FileNameType + ".css",
+            chunkFilename: FileNameType + ".css",
+        }),
     ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                // 抽离出 react、react-dom
+                react: {
+                    name: "react~vender",
+                    test: /[\\/]node_modules[\\/]react/,
+                    chunks: "all",
+                    enforce: true,
+                    priority: 10,
+                    reuseExistingChunk: true,
+                },
+                // 抽离出 node_module 插件
+                venders: {
+                    name: "venders",
+                    test: /[\\/]node_modules/,
+                    chunks: "all",
+                    enforce: true,
+                    priority: 2,
+                    reuseExistingChunk: true,
+                },
+                // 抽离出公用的业务代码
+                common: {
+                    name: "common~venders",
+                    chunks: "initial",
+                    minChunks: 2,
+                    priority: 1,
+                    reuseExistingChunk: true,
+                },
+            },
+        },
+    },
     devServer: {
         host: "127.0.0.1",
         port: 1996,

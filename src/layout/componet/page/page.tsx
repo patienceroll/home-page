@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { memo, Suspense, useContext } from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 
 import RouteData from "@src/route/route";
@@ -20,7 +20,7 @@ const Page: React.FC = memo(() => {
     };
 
     return (
-        <div className={style.page_container}> 
+        <div className={style.page_container}>
             <div
                 className={`${style.contain} ${showAbout ? style.swipe_left : ""} ${
                     showNav ? style.swipe_right : ""
@@ -29,7 +29,11 @@ const Page: React.FC = memo(() => {
                 <Switch>
                     <Redirect exact from="/" to="/home" />
                     {RouteData.map(item => (
-                        <Route path={item.RouteProps.path}>{<item.component />}</Route>
+                        <Route path={item.RouteProps.path}>
+                            <Suspense fallback={<div>加载中</div>}>
+                                <item.component />
+                            </Suspense>
+                        </Route>
                     ))}
                 </Switch>
             </div>

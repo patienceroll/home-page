@@ -1,42 +1,41 @@
-import React from "react";
+import React, { lazy } from "react";
 import { LinkProps, RouteProps } from "react-router-dom";
-
-import Home from "@src/page/home/home";
-import PhotoCenter from "@src/page/photo-center/photo-center";
-import StudyCenter from "@src/page/study-center/study-center";
-import canvas from "@src/page/canvas/canvas";
 
 type RouteTypeItem = {
     name: string;
     props?: Omit<LinkProps, "to">;
     to: LinkProps["to"];
     RouteProps: RouteProps;
-    component: React.FC | React.ComponentClass;
+    component: React.LazyExoticComponent<React.FC<any> | React.ComponentClass<any>>;
 };
 
 const RouteData: RouteTypeItem[] = [
     {
         name: "主页",
         to: "/home",
-        component: Home,
+        component: lazy(() => import(/**  webpackChunkName: "home"  */ "@src/page/home/home")),
         RouteProps: { path: "/home" },
     },
     {
         name: "相册",
-        to: "/photo-center",
-        component: PhotoCenter,
-        RouteProps: { path: "/photo-center" },
+        to: "/photo-ablum",
+        component: lazy(
+            () => import(/**  webpackChunkName: "home"  */ "@src/page/photo-ablum/photo-ablum")
+        ),
+        RouteProps: { path: "/photo-ablum" },
     },
     {
         name: "学习记录",
-        to: "/study-center",
-        component: StudyCenter,
-        RouteProps: { path: "/study-center" },
+        to: "/study-record",
+        component: lazy(
+            () => import(/**  webpackChunkName: "home"  */ "@src/page/study-record/study-record")
+        ),
+        RouteProps: { path: "/study-record" },
     },
     {
         name: "canvas",
         to: "/canvas-center",
-        component: canvas,
+        component: lazy(() => import(/**  webpackChunkName: "home"  */ "@src/page/canvas/canvas")),
         RouteProps: { path: "/canvas-center" },
     },
 ];
