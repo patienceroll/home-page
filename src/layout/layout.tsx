@@ -11,6 +11,8 @@ import { LayoutContext } from "@src/context/context";
 import "../global.less";
 import "@src/animate/animate.less";
 
+import style from "./layout.module.less";
+
 const Layout: React.FC = () => {
     const { pathname } = useLocation();
 
@@ -36,7 +38,9 @@ const Layout: React.FC = () => {
         <LayoutContext.Provider value={{ setShowNav, setShowAbout, state: { showAbout, showNav } }}>
             <div>
                 <Header />
+
                 <div>
+                    <div className={style.header_placeholder} />
                     <Menu />
                     <Page />
                     <About />
