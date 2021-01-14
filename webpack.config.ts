@@ -1,6 +1,10 @@
-import webpack, { Configuration, loader } from "webpack";
+import { Configuration, loader } from "webpack";
 import path from "path";
 import LoaderUtils from "loader-utils";
+
+const MODE = process.env.MODE as "development" | "production";
+
+console.log(MODE, MODE.length);
 
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
@@ -17,7 +21,7 @@ const config: Configuration = {
         filename: FileNameType + ".js",
         chunkFilename: FileNameType + ".js",
     },
-    mode: "production",
+    mode: MODE,
     resolve: {
         extensions: [".tsx", ".ts", ".js", ".jsx"],
         alias: {

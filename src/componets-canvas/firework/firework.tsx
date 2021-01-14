@@ -108,6 +108,7 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
                             context2d.beginPath();
                             context2d.arc(600 + x * 40, 315 + y * 40, 15, 0, 2 * Math.PI);
                             context2d.stroke();
+                            debugger;
                         }
                     }
 
