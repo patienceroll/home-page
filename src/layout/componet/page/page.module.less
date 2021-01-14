@@ -10,7 +10,7 @@
     left: 0;
     visibility: hidden;
     // 隐藏的时候,300ms后隐藏,透明度ease变化
-    transition: opacity 0.3s ease 0ms, visibility 0s ease 400ms;
+    transition: opacity 0.5s ease 0ms, visibility 0s ease 500ms;
     background-color: #000;
     opacity: 0;
     width: 100vw;
@@ -19,17 +19,17 @@
 
 .mask_show {
     // 显示的时候,立即显示,透明度ease变化
-    transition: opacity 0.3s ease 0ms, visibility 0s ease;
+    transition: opacity 0.5s ease 0ms, visibility 0s ease;
     visibility: visible;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .contain {
     width: 100vw;
     min-height: calc(100vh - 60px);
     background-color: #f2f2f2;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease-out;
 }
 
 .swipe_left {

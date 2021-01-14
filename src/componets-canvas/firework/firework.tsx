@@ -108,7 +108,6 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
                             context2d.beginPath();
                             context2d.arc(600 + x * 40, 315 + y * 40, 15, 0, 2 * Math.PI);
                             context2d.stroke();
-                            debugger;
                         }
                     }
 
@@ -131,6 +130,20 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
                     context2d.setLineDash([10, 10]);
                     context2d.lineTo(200, 700);
                     context2d.stroke();
+
+                    // 在圆里面填充渐变
+                    const Gradient = context2d.createRadialGradient(100, 800, 0, 100, 800, 90);
+                    Gradient.addColorStop(0, "yellow");
+                    Gradient.addColorStop(0.5, "#f40");
+                    Gradient.addColorStop(1, "blue");
+
+                    context2d.fillStyle = Gradient;
+                    // 绘制一个圆
+                    context2d.beginPath();
+                    context2d.setLineDash([0, 0]);
+                    context2d.arc(100, 800, 100, 0, 2 * Math.PI);
+                    context2d.setLineDash([0, 0]);
+                    context2d.fill();
                 }
             }
         };

@@ -4,8 +4,6 @@ import LoaderUtils from "loader-utils";
 
 const MODE = process.env.MODE as "development" | "production";
 
-console.log(MODE, MODE.length);
-
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
@@ -90,8 +88,12 @@ const config: Configuration = {
         ],
     },
     plugins: [
-        // 删除输出目录
+        // 删除dist
         new CleanWebpackPlugin({}),
+        // 输出 index.html 文件
+        new HtmlWebpackPlugin({
+            template: "public/index.html",
+        }),
         // 复制文件夹
         new CopyWebpackPlugin({
             patterns: [
@@ -107,16 +109,13 @@ const config: Configuration = {
                 },
             ],
         }),
-        // 输出 index.html 文件
-        new HtmlWebpackPlugin({
-            template: "public/index.html",
-        }),
         // 分理出 css 文件
         new MiniCssExtractPlugin({
             filename: FileNameType + ".css",
             chunkFilename: FileNameType + ".css",
         }),
     ],
+
     optimization: {
         splitChunks: {
             cacheGroups: {
