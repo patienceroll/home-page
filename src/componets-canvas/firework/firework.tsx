@@ -132,7 +132,7 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
                     context2d.stroke();
 
                     // 在圆里面填充渐变
-                    const Gradient = context2d.createRadialGradient(100, 800, 0, 100, 800, 90);
+                    const Gradient = context2d.createRadialGradient(150, 800, 0, 150, 800, 90);
                     Gradient.addColorStop(0, "yellow");
                     Gradient.addColorStop(0.5, "#f40");
                     Gradient.addColorStop(1, "blue");
@@ -141,9 +141,24 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
                     // 绘制一个圆
                     context2d.beginPath();
                     context2d.setLineDash([0, 0]);
-                    context2d.arc(100, 800, 100, 0, 2 * Math.PI);
+                    context2d.arc(150, 800, 100, 0, 2 * Math.PI);
                     context2d.setLineDash([0, 0]);
+                    context2d.shadowOffsetX = 10;
+                    context2d.shadowOffsetY = 10;
+                    context2d.shadowBlur = 10;
+                    context2d.shadowColor = "#333";
                     context2d.fill();
+
+                    // 插入一个图片
+                    const img = new Image();
+                    img.src = "/public/back-ground.svg";
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                    img.onload = () => {
+                        const imgPrint = context2d.createPattern(img, "repeat");
+                        if (imgPrint) context2d.fillStyle = imgPrint;
+                        context2d.fillRect(0, 0, 1920, 1080);
+                    };
                 }
             }
         };

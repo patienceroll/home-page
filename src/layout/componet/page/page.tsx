@@ -29,7 +29,7 @@ const Page: React.FC = memo(() => {
                 <Switch>
                     <Redirect exact from="/" to="/home" />
                     {RouteData.map(item => (
-                        <Route path={item.RouteProps.path}>
+                        <Route key={item.name} path={item.RouteProps.path}>
                             <Suspense fallback={<div>加载中</div>}>
                                 <item.component />
                             </Suspense>
