@@ -149,16 +149,27 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
                     context2d.shadowColor = "#333";
                     context2d.fill();
 
-                    // 插入一个图片
+                    // 把图片当作内容填充
                     const img = new Image();
                     img.src = "/public/back-ground.svg";
                     img.style.width = "100%";
                     img.style.height = "100%";
                     img.onload = () => {
+                        // 把图片当作内容填充
                         const imgPrint = context2d.createPattern(img, "repeat");
                         if (imgPrint) context2d.fillStyle = imgPrint;
                         context2d.fillRect(0, 0, 1920, 1080);
+
+                        // 插入一个图片
+                        context2d.drawImage(img, 600, 700, 192, 108);
+
+                        // 插入一个裁切的图片
+                        context2d.drawImage(img, 960, 540, 960, 540, 800, 700, 96, 54);
                     };
+
+                    // 插入文字
+                    context2d.font = "80px Times New Roman";
+                    context2d.fillText("cloud", 300, 800);
                 }
             }
         };
