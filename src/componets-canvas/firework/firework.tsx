@@ -5,6 +5,8 @@ type CanvasFireworkProps = {
     className?: string;
 };
 
+type point = { x: number; y: number };
+
 const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
     ({ style = {}, className }) => {
         const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,156 +22,53 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
             }
         };
 
+        /** 画圆饼圆形图 */
+        const drawCircle = (ctx: CanvasRenderingContext2D) => {
+            // 画制圆环饼图
+            for (let r = 1; r <= 6; r++) {
+                ctx.save();
+                ctx.fillStyle = "rgb(" + 42.5 * r + "," + (255 - 42.5 * r) + ",255)";
+                ctx.translate(100, 100);
+                for (let d = 1; d <= r * 6; d++) {
+                    ctx.rotate((Math.PI * 2) / (6 * r));
+                    ctx.beginPath();
+                    ctx.arc(r * 15, 0, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        };
+
+        /** 画直线 */
+        const drawLine = (
+            ctx: CanvasRenderingContext2D,
+            option: { startPoint: point; endPoint: point }
+        ) => {
+            const { startPoint, endPoint } = option;
+            ctx.beginPath();
+            ctx.moveTo(startPoint.x, startPoint.y);
+            ctx.lineTo(endPoint.x, endPoint.y);
+            ctx.closePath();
+            ctx.stroke();
+        };
+
+        /** 练习 canvas ransform */
+        const testTransiform = (ctx: CanvasRenderingContext2D) => {
+            ctx.save();
+            ctx.fillStyle = "#f40";
+
+            ctx.transform(1, Math.sin((Math.PI * 2) / 3), 0, 1, 0, 0);
+            ctx.fillRect(10, 400, 100, 10);
+        };
+
         /** 练习绘制 */
         const draw = () => {
             if (canvasRef.current) {
-                const context2d = canvasRef.current.getContext("2d");
-                if (context2d) {
-                    context2d.strokeStyle = "orange";
-                    context2d.fillStyle = "green";
-                    context2d.fillRect(110, 10, 80, 80);
-                    context2d.strokeRect(100, 0, 100, 100);
-                    context2d.clearRect(125, 25, 50, 50);
-
-                    // 绘制实心三角形
-                    context2d.strokeStyle = "red";
-                    context2d.fillStyle = "#999";
-                    context2d.beginPath();
-                    context2d.moveTo(300, 0);
-                    context2d.lineTo(300, 100);
-                    context2d.lineTo(300 + Math.sqrt(3) * 100, 100);
-                    context2d.fill();
-
-                    // 绘制等边空心三角形
-                    context2d.beginPath();
-                    context2d.moveTo(550, 0);
-                    context2d.lineTo(550, 100);
-                    context2d.lineTo(550 + Math.sqrt(3) * 50, 50);
-                    context2d.closePath();
-                    context2d.stroke();
-
-                    // 绘制一个圆
-                    context2d.beginPath();
-                    context2d.arc(800, 50, 50, Math.PI, (3 / 2) * Math.PI);
-                    context2d.lineTo(800, 50);
-                    context2d.closePath();
-                    context2d.stroke();
-
-                    // 绘制一个圆弧
-                    context2d.beginPath();
-                    context2d.arc(150, 250, 50, -Math.PI / 2, (7 * Math.PI) / 6);
-                    context2d.stroke();
-
-                    // 绘制一个残缺的圆
-                    context2d.beginPath();
-                    context2d.arc(350, 250, 50, -Math.PI / 2, (7 * Math.PI) / 6);
-                    context2d.fill();
-
-                    // 绘制一个二次贝塞尔曲线
-                    context2d.beginPath();
-                    context2d.moveTo(450, 300);
-                    context2d.quadraticCurveTo(480, 230, 550, 200);
-                    context2d.stroke();
-
-                    // 绘制一个气泡
-                    context2d.beginPath();
-                    context2d.moveTo(650, 250);
-                    context2d.quadraticCurveTo(650, 200, 750, 200);
-                    context2d.quadraticCurveTo(850, 200, 850, 250);
-                    context2d.quadraticCurveTo(850, 300, 750, 300);
-                    context2d.quadraticCurveTo(740, 320, 720, 320);
-                    context2d.quadraticCurveTo(735, 310, 740, 300);
-                    context2d.quadraticCurveTo(650, 300, 650, 250);
-                    context2d.stroke();
-
-                    // 创建一个path2D对象
-                    const circle = new Path2D();
-                    circle.arc(150, 400, 50, 0, Math.PI / 2);
-                    circle.lineTo(150, 350);
-                    circle.closePath();
-                    context2d.stroke(circle);
-
-                    // 填充不同的颜色(调色板)
-                    for (let x = 1; x <= 8; x++) {
-                        for (let y = 1; y <= 8; y++) {
-                            context2d.fillStyle = `rgb(${Math.floor(255 - 31.875 * x)},${Math.floor(
-                                255 - 31.875 * y
-                            )},0)`;
-                            context2d.fillRect(250 + x * 40, 300 + y * 40, 40, 40);
-                        }
-                    }
-
-                    // 填充不同颜色的圈圈
-                    for (let x = 1; x <= 8; x++) {
-                        for (let y = 1; y <= 8; y++) {
-                            context2d.strokeStyle = `rgb(${Math.floor(
-                                255 - 31.875 * x
-                            )},${Math.floor(255 - 31.875 * y)},0)`;
-                            context2d.beginPath();
-                            context2d.arc(600 + x * 40, 315 + y * 40, 15, 0, 2 * Math.PI);
-                            context2d.stroke();
-                        }
-                    }
-
-                    // 连接几条线
-                    context2d.lineCap = "round";
-                    context2d.lineWidth = 10;
-                    context2d.beginPath();
-                    context2d.moveTo(100, 600);
-                    context2d.lineTo(150, 650);
-                    context2d.stroke();
-
-                    context2d.lineTo(200, 600);
-                    context2d.lineJoin = "round";
-                    context2d.stroke();
-
-                    context2d.lineTo(250, 650);
-                    context2d.lineJoin = "bevel";
-                    context2d.stroke();
-
-                    context2d.setLineDash([10, 10]);
-                    context2d.lineTo(200, 700);
-                    context2d.stroke();
-
-                    // 在圆里面填充渐变
-                    const Gradient = context2d.createRadialGradient(150, 800, 0, 150, 800, 90);
-                    Gradient.addColorStop(0, "yellow");
-                    Gradient.addColorStop(0.5, "#f40");
-                    Gradient.addColorStop(1, "blue");
-
-                    context2d.fillStyle = Gradient;
-                    // 绘制一个圆
-                    context2d.beginPath();
-                    context2d.setLineDash([0, 0]);
-                    context2d.arc(150, 800, 100, 0, 2 * Math.PI);
-                    context2d.setLineDash([0, 0]);
-                    context2d.shadowOffsetX = 10;
-                    context2d.shadowOffsetY = 10;
-                    context2d.shadowBlur = 10;
-                    context2d.shadowColor = "#333";
-                    context2d.fill();
-
-                    // 把图片当作内容填充
-                    const img = new Image();
-                    img.src = "/public/back-ground.svg";
-                    img.style.width = "100%";
-                    img.style.height = "100%";
-                    img.onload = () => {
-                        // 把图片当作内容填充
-                        const imgPrint = context2d.createPattern(img, "repeat");
-                        if (imgPrint) context2d.fillStyle = imgPrint;
-                        context2d.fillRect(0, 0, 1920, 1080);
-
-                        // 插入一个图片
-                        context2d.drawImage(img, 600, 700, 192, 108);
-
-                        // 插入一个裁切的图片
-                        context2d.drawImage(img, 960, 540, 960, 540, 800, 700, 96, 54);
-                    };
-
-                    // 插入文字
-                    context2d.font = "80px Times New Roman";
-                    context2d.fillText("cloud", 300, 800);
+                const ctx = canvasRef.current.getContext("2d");
+                if (ctx) {
+                    drawLine(ctx, { startPoint: { x: 100, y: 100 }, endPoint: { x: 100, y: 300 } });
+                    drawCircle(ctx);
+                    testTransiform(ctx);
                 }
             }
         };
