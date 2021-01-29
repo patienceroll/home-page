@@ -1,51 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { FC, useState } from "react";
+import { HashRouter, useLocation } from "react-router-dom";
 
-import Header from "./componet/header/header";
-import Menu from "./componet/menu/menu";
-import Page from "./componet/page/page";
-import About from "./componet/about/about";
+import LayoutContext from "@src/layout/context/context";
 
-import { LayoutContext } from "@src/context/context";
+import Header from "@src/layout/componet/header/header";
+import Nav from "@src/layout/componet/nav/nav";
+import Section from "@src/layout/componet/section/section";
+import Aside from "@src/layout/componet/aside/aside";
 
-import "../global.less";
-import "@src/animate/animate.less";
-
-import style from "./layout.module.less";
-
-const Layout: React.FC = () => {
-    const { pathname } = useLocation();
-
-    /** 是否显示菜单 */
+const Layout: FC = () => {
     const [showNav, setShowNav] = useState(false);
-    /** 是否显示关于 */
-    const [showAbout, setShowAbout] = useState(false);
-
-    useEffect(() => {
-        if (showAbout) setShowNav(false);
-    }, [showAbout]);
-
-    useEffect(() => {
-        if (showNav) setShowAbout(false);
-    }, [showNav]);
-
-    useEffect(() => {
-        setShowAbout(false);
-        setShowNav(false);
-    }, [pathname]);
+    const [showAside, setShowAside] = useState(false);
 
     return (
-        <LayoutContext.Provider value={{ setShowNav, setShowAbout, state: { showAbout, showNav } }}>
-            <div>
+        <HashRouter>
+            <LayoutContext.Provider
+                value={{ state: { showAside, showNav }, setShowNav, setShowAside }}
+            >
                 <Header />
-
-                <div>
-                    <Menu />
-                    <Page />
-                    <About />
-                </div>
-            </div>
-        </LayoutContext.Provider>
+                <Nav />
+                <Section />
+                <Aside />
+                <footer></footer>
+            </LayoutContext.Provider>
+        </HashRouter>
     );
 };
 

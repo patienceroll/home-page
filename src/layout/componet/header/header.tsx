@@ -2,30 +2,21 @@ import React, { memo, useContext } from "react";
 
 import HOME_SVG from "@src/assets/svg/home.svg";
 
-import { LayoutContext } from "@src/context/context";
+import LayoutContext from "@src/layout/context/context";
 
 import style from "./header.module.less";
 
-const Header: React.FC = () => {
+const Header = memo(() => {
     const {
-        setShowAbout,
+        state: { showNav, showAside },
         setShowNav,
-        state: { showNav },
+        setShowAside,
     } = useContext(LayoutContext);
-
-    const onClickNavIcon = () => {
-        setShowNav(isShow => !isShow);
-    };
-
-    const onClickAboutContain = () => {
-        setShowAbout(isShow => !isShow);
-    };
-
     return (
-        <div className={style.header_container}>
+        <header className={style.header}>
             <div
-                onClick={onClickNavIcon}
-                className={`${style.nav_icon_container} ${showNav ? style.clicked : ""}`}
+                onClick={setShowNav.bind(null, !showNav)}
+                className={`${style.nav_icon_CT}${showNav ? ` ${style.clicked}` : ""}`}
             >
                 <div className={style.nav_icon}>
                     {/* 导航按钮 */}
@@ -40,16 +31,19 @@ const Header: React.FC = () => {
                 <div className={`${style.nav_text} waggle_animate`}>导航</div>
             </div>
 
-            <div className={style.header_title}>Patience Drinking Dream Every Day</div>
+            <div className={style.title}>Zzz...</div>
 
-            <div className={style.about_me_contain}>
-                <div onClick={onClickAboutContain} className={`${style.about_me} shake_animate`}>
+            <div className={style.right_btn_CT}>
+                <div
+                    onClick={setShowAside.bind(null, !showAside)}
+                    className={`${style.right_btn} shake_animate`}
+                >
                     <img src={HOME_SVG} alt="" />
                     <span>关于</span>
                 </div>
             </div>
-        </div>
+        </header>
     );
-};
+});
 
-export default memo(Header);
+export default Header;

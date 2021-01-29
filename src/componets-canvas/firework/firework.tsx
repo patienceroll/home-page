@@ -5,8 +5,6 @@ type CanvasFireworkProps = {
     className?: string;
 };
 
-type point = { x: number; y: number };
-
 const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
     ({ style = {}, className }) => {
         const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,53 +20,49 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
             }
         };
 
-        /** 画圆饼圆形图 */
-        const drawCircle = (ctx: CanvasRenderingContext2D) => {
-            // 画制圆环饼图
-            for (let r = 1; r <= 6; r++) {
-                ctx.save();
-                ctx.fillStyle = "rgb(" + 42.5 * r + "," + (255 - 42.5 * r) + ",255)";
-                ctx.translate(100, 100);
-                for (let d = 1; d <= r * 6; d++) {
-                    ctx.rotate((Math.PI * 2) / (6 * r));
-                    ctx.beginPath();
-                    ctx.arc(r * 15, 0, 5, 0, 2 * Math.PI);
-                    ctx.fill();
-                }
-                ctx.restore();
-            }
-        };
-
-        /** 画直线 */
-        const drawLine = (
-            ctx: CanvasRenderingContext2D,
-            option: { startPoint: point; endPoint: point }
-        ) => {
-            const { startPoint, endPoint } = option;
-            ctx.beginPath();
-            ctx.moveTo(startPoint.x, startPoint.y);
-            ctx.lineTo(endPoint.x, endPoint.y);
-            ctx.closePath();
-            ctx.stroke();
-        };
-
-        /** 练习 canvas ransform */
-        const testTransiform = (ctx: CanvasRenderingContext2D) => {
-            ctx.save();
-            ctx.fillStyle = "#f40";
-
-            ctx.transform(1, Math.sin((Math.PI * 2) / 3), 0, 1, 0, 0);
-            ctx.fillRect(10, 400, 100, 10);
-        };
-
-        /** 练习绘制 */
-        const draw = () => {
-            if (canvasRef.current) {
+        /** 绘制时分秒 */
+        const drawClock = () => {
+            if (canvasRef.current && containerRef.current) {
                 const ctx = canvasRef.current.getContext("2d");
+
+                const { clientHeight, clientWidth } = containerRef.current;
+                const x = clientWidth / 2;
+                const y = clientHeight / 2;
                 if (ctx) {
-                    drawLine(ctx, { startPoint: { x: 100, y: 100 }, endPoint: { x: 100, y: 300 } });
-                    drawCircle(ctx);
-                    testTransiform(ctx);
+                    ctx.save();
+                    ctx.clearRect(0, 0, clientWidth, clientHeight);
+                    const time = new Date();
+                    // 12进制的小时
+                    const hour = time.getHours() >= 12 ? time.getHours() - 12 : time.getHours();
+                    const min = time.getMinutes();
+                    const sec = time.getSeconds();
+
+                    ctx.lineCap = "round";
+                    ctx.fillStyle = "#000";
+                    // 绘制小时的横条
+
+                    ctx.translate(x, y);
+                    ctx.rotate((hour * Math.PI) / 12 - Math.PI / 2);
+                    ctx.fillRect(0, 0, 50, 4);
+                    ctx.rotate(-((hour * Math.PI) / 12 - Math.PI / 2));
+
+                    // 绘制分
+
+                    ctx.rotate((min * Math.PI) / 30 - Math.PI / 2);
+                    ctx.fillRect(0, 0, 100, 2);
+                    ctx.rotate(-((min * Math.PI) / 30 - Math.PI / 2));
+                    ctx.fillStyle = "#f40";
+
+                    ctx.rotate((sec * Math.PI) / 30 - Math.PI / 2);
+                    ctx.beginPath();
+                    ctx.fillRect(0, 0, 120, 1);
+                    ctx.rotate(-((sec * Math.PI) / 30 - Math.PI / 2));
+                    ctx.fill();
+
+                    setTimeout(() => {
+                        ctx.restore();
+                        drawClock();
+                    }, 1000);
                 }
             }
         };
@@ -78,7 +72,7 @@ const CanvasFirework: NamedExoticComponent<CanvasFireworkProps> = memo(
         }, []);
 
         useEffect(() => {
-            draw();
+            requestAnimationFrame(drawClock);
         }, []);
 
         return (

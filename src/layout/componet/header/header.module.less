@@ -1,22 +1,23 @@
-@import "../../../theme/theme.less";
+@import "~@src/theme/theme.less";
 
-.header_container {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    height: 60px;
+.header {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: @header_height;
+    width: 100%;
     text-align: center;
     background-color: #fff;
     border-bottom: 1px solid @border_color;
-    z-index: 99;
+    z-index: @max_z_index;
+    cursor: pointer;
 }
 
-.nav_icon_container {
+.nav_icon_CT {
     display: flex;
     flex-shrink: 0;
     height: 100%;
-    cursor: pointer;
     .nav_icon {
         display: flex;
         align-items: center;
@@ -56,7 +57,7 @@
     }
 }
 
-.nav_icon_container:hover {
+.nav_icon_CT:hover {
     ul {
         li:nth-child(1) {
             top: 0;
@@ -71,32 +72,6 @@
         li:nth-child(4) {
             top: 23px;
             opacity: 1;
-        }
-    }
-}
-
-.clicked {
-    ul {
-        li {
-            transition: opacity 0 ease;
-        }
-        li:nth-child(1) {
-            top: 12px;
-            opacity: 1;
-            transform: rotate(45deg);
-        }
-        li:nth-child(2) {
-            top: 7px;
-            opacity: 0;
-        }
-        li:nth-child(3) {
-            top: 14px;
-            opacity: 1;
-            transform: rotate(-45deg);
-        }
-        li:nth-child(4) {
-            top: 23px;
-            opacity: 0;
         }
     }
 }
@@ -128,18 +103,14 @@
     }
 }
 
-.about_me_contain {
-    padding: 0 2px;
-}
-
 .nav_text,
-.about_me {
-    line-height: 60px;
+.right_btn {
+    line-height: @header_height;
     font-size: 18px;
     font-weight: 500;
 }
 
-.about_me {
+.right_btn {
     flex-shrink: 0;
     cursor: pointer;
     padding: 0 10px;
@@ -155,9 +126,14 @@
     }
 }
 
-.header_title {
-    line-height: 60px;
+.title {
+    line-height: @header_height;
     font-size: 24px;
     font-weight: bold;
     flex: 1;
+}
+
+/** 防止内容左右晃动的时候,超出屏幕 */
+.right_btn_CT {
+    padding: 0 2px;
 }

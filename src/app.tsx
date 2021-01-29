@@ -1,15 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter } from "react-router-dom";
 
 import Layout from "@src/layout/layout";
 
-const App = () => {
-    return (
-        <HashRouter>
-            <Layout />
-        </HashRouter>
-    );
-};
+import "@src/global.less";
+import '@src/animate/animate.less';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Layout />, document.getElementById("root"));
