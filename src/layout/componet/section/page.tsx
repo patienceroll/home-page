@@ -3,26 +3,26 @@ import { Switch, Redirect, Route } from "react-router-dom";
 
 import RouteData from "@src/route/route";
 
-import { LayoutContext } from "@src/context/context";
+import LayoutContext from "@src/layout/context/context";
 
 import style from "./page.module.less";
 
 const Page: React.FC = memo(() => {
     const {
-        state: { showNav, showAbout },
-        setShowAbout,
+        state: { showNav, showAside },
+        setShowAside,
         setShowNav,
     } = useContext(LayoutContext);
 
     const onClickMask = () => {
-        setShowAbout(false);
+        setShowAside(false);
         setShowNav(false);
     };
 
     return (
         <div className={style.page_container}>
             <div
-                className={`${style.contain} ${showAbout ? style.swipe_left : ""} ${
+                className={`${style.contain} ${showAside ? style.swipe_left : ""} ${
                     showNav ? style.swipe_right : ""
                 }`}
             >
@@ -40,7 +40,7 @@ const Page: React.FC = memo(() => {
 
             <div
                 onClick={onClickMask}
-                className={`${style.mask} ${showNav || showAbout ? style.mask_show : ""}`}
+                className={`${style.mask} ${showNav || showAside ? style.mask_show : ""}`}
             ></div>
         </div>
     );
