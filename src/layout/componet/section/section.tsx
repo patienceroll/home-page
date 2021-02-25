@@ -26,16 +26,14 @@ const Section = memo(() => {
                     showAside ? Style.t_left : ""
                 }`}
             >
-                <Switch>
-                    <Route exact path="/" children={<Redirect to="/home" />} />
-                    {RouteData.map(item => (
-                        <Route key={item.name} {...item.RouteProps}>
-                            <Suspense fallback={<div>加载中</div>}>
-                                <item.component />
-                            </Suspense>
-                        </Route>
-                    ))}
-                </Switch>
+                <Suspense fallback={<div>加载中...</div>}>
+                    <Switch>
+                        <Route exact path="/" children={<Redirect to="/home" />} />
+                        {RouteData.map(item => (
+                            <Route key={item.name} {...item.RouteProps} />
+                        ))}
+                    </Switch>
+                </Suspense>
                 <div
                     onClick={onClickMask}
                     className={`${Style.mask} ${showAside || showNav ? Style.show : ""}`}

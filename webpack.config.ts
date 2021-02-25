@@ -101,9 +101,7 @@ const config: Configuration = {
                     from: "public",
                     to: "public",
                     filter: path => {
-                        if (/index.html$/.test(path)) {
-                            return false;
-                        }
+                        if (/index.html$/.test(path)) return false;
                         return true;
                     },
                 },
