@@ -1,5 +1,5 @@
 import React, { memo, Suspense, useContext } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import LayoutContext from "@src/layout/context/context";
 
@@ -21,14 +21,21 @@ const Section = memo(() => {
 
     return (
         <section className={`${Style.CT}`}>
-            <div className={`${Style.CT_inner} ${showNav ? Style.t_right : ""} ${showAside ? Style.t_left : ""}`}>
-                {RouteData.map(item => (
-                    <Route key={item.name} {...item.RouteProps}>
-                        <Suspense fallback={<div>加载中</div>}>
-                            <item.component />
-                        </Suspense>
-                    </Route>
-                ))}
+            <div
+                className={`${Style.CT_inner} ${showNav ? Style.t_right : ""} ${
+                    showAside ? Style.t_left : ""
+                }`}
+            >
+                <Switch>
+                    <Route exact path="/" children={<Redirect to="/home" />} />
+                    {RouteData.map(item => (
+                        <Route key={item.name} {...item.RouteProps}>
+                            <Suspense fallback={<div>加载中</div>}>
+                                <item.component />
+                            </Suspense>
+                        </Route>
+                    ))}
+                </Switch>
                 <div
                     onClick={onClickMask}
                     className={`${Style.mask} ${showAside || showNav ? Style.show : ""}`}
