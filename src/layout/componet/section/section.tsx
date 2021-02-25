@@ -30,7 +30,11 @@ const Section = memo(() => {
                     <Switch>
                         <Route exact path="/" children={<Redirect to="/home" />} />
                         {RouteData.map(item => (
-                            <Route key={item.name} {...item.RouteProps} />
+                            <Route
+                                key={item.name}
+                                {...item.RouteProps}
+                                component={item.component}
+                            />
                         ))}
                     </Switch>
                 </Suspense>

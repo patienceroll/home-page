@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { HashRouter, useLocation } from "react-router-dom";
+import React, { FC, useCallback, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import LayoutContext from "@src/layout/context/context";
 
@@ -9,6 +9,7 @@ import Section from "@src/layout/componet/section/section";
 import Aside from "@src/layout/componet/aside/aside";
 
 const Layout: FC = () => {
+    const { pathname } = useLocation();
     const [showNav, setShowNav] = useState(false);
     const [showAside, setShowAside] = useState(false);
 
@@ -16,22 +17,25 @@ const Layout: FC = () => {
         if (showNav) setShowAside(false);
     }, [showNav]);
 
-    useEffect(()=>{
-        if(showAside) setShowNav(false);
-    },[showAside])
+    useEffect(() => {
+        if (showAside) setShowNav(false);
+    }, [showAside]);
+
+    const ShowSection = useCallback(() => {
+        setShowAside(false);
+        setShowNav(false);
+    }, []);
+
+    useEffect(ShowSection, [pathname]);
 
     return (
-        <HashRouter>
-            <LayoutContext.Provider
-                value={{ state: { showAside, showNav }, setShowNav, setShowAside }}
-            >
-                <Header />
-                <Nav />
-                <Section />
-                <Aside />
-                <footer></footer>
-            </LayoutContext.Provider>
-        </HashRouter>
+        <LayoutContext.Provider value={{ state: { showAside, showNav }, setShowNav, setShowAside }}>
+            <Header />
+            <Nav />
+            <Section />
+            <Aside />
+            <footer></footer>
+        </LayoutContext.Provider>
     );
 };
 
