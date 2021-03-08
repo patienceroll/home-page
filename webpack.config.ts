@@ -99,7 +99,7 @@ const config: Configuration = {
             patterns: [
                 {
                     from: "public",
-                    to: "public",
+                    to: "",
                     filter: path => {
                         if (/index.html$/.test(path)) return false;
                         return true;

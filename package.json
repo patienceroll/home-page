@@ -4,8 +4,8 @@
   "description": "脚手架",
   "main": "app.tsx",
   "scripts": {
-    "start": "set MODE=development&&npx  webpack serve",
-    "build": "set MODE=production&&npx webpack --config webpack.config.ts",
+    "start": "set MODE=development&&yarn  webpack serve",
+    "build": "set MODE=production&&yarn webpack --config webpack.config.ts",
     "commit": "cz"
   },
   "repository": {

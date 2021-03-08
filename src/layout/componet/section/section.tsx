@@ -3,6 +3,8 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import LayoutContext from "@src/layout/context/context";
 
+import Loading from "@src/componets-canvas/loading/loading";
+
 import RouteData from "@src/route/route";
 
 import Style from "./section.module.less";
@@ -26,7 +28,7 @@ const Section = memo(() => {
                     showAside ? Style.t_left : ""
                 }`}
             >
-                <Suspense fallback={<div>加载中...</div>}>
+                <Suspense fallback={<Loading />}>
                     <Switch>
                         <Route exact path="/" children={<Redirect to="/home" />} />
                         {RouteData.map(item => (
