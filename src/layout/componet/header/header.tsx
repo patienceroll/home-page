@@ -38,7 +38,7 @@ const Header = memo(() => {
                     onClick={setShowAside.bind(null, !showAside)}
                     className={`${style.right_btn} shake_animate`}
                 >
-                    <img src={HOME_SVG} alt="" />
+                    <HOME_SVG />
                     <span>关于</span>
                 </div>
             </div>

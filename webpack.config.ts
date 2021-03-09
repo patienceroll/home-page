@@ -75,7 +75,11 @@ const config: Configuration = {
                 use: ["ts-loader"],
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.svg$/,
+                use: ["@svgr/webpack"],
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
                 use: [
                     {
                         loader: "file-loader",
