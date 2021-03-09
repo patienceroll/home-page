@@ -2,7 +2,6 @@
 
 .CT {
     position: relative;
-    overflow: hidden;
     min-width: 100vw;
     min-height: 100vh;
 }
@@ -22,22 +21,4 @@
 
 .t_right {
     left: 100px;
-}
-
-.mask {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms ease, z-index 0s linear 300ms;
-    opacity: 0;
-    z-index: -1;
-}
-
-.show {
-    z-index: @max_z_index - 2;
-    opacity: 1;
-    transition: opacity 500ms ease, z-index 300ms linear;
 }

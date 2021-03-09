@@ -17,11 +17,6 @@ const Section = memo(() => {
         setShowNav,
     } = useContext(LayoutContext);
 
-    const onClickMask = () => {
-        setShowAside(false);
-        setShowNav(false);
-    };
-
     return (
         <section className={`${Style.CT}`}>
             <div
@@ -42,10 +37,7 @@ const Section = memo(() => {
                         <Route children={<Page404 />} />
                     </Switch>
                 </Suspense>
-                <div
-                    onClick={onClickMask}
-                    className={`${Style.mask} ${showAside || showNav ? Style.show : ""}`}
-                />
+
             </div>
         </section>
     );

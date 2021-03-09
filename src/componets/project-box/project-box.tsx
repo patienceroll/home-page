@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 
 import Style from "./project-box.module.less";
 interface ProjectBoxProps {
@@ -6,10 +6,11 @@ interface ProjectBoxProps {
     subTitle?: string;
     /** 跳转的url,如果不传入则不做跳转 */
     url?: string;
+    image: string;
 }
 
 const ProjectBox = memo<ProjectBoxProps>(props => {
-    const { title, subTitle, url } = props;
+    const { title, subTitle, url, image } = props;
 
     const onClick = () => {
         if (url) window.open(url);
@@ -17,9 +18,13 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
 
     return (
         <div className={Style.CT} onClick={onClick}>
+            <img src={image} />
+
             <div className={Style.content_mask}>
-                <div>{title}</div>
-                <div>{subTitle}</div>
+                <div className={Style.text}>
+                    <div>{title}</div>
+                    <div>{subTitle}</div>
+                </div>
             </div>
         </div>
     );
