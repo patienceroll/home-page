@@ -1,9 +1,17 @@
+@import "~@src/theme/theme";
+
 .CT {
     display: flex;
     flex-wrap: wrap;
-}   
+    min-height: calc(100vh - @header_height);
+}
 
 .pro_item {
     width: 33.333333%;
     height: 250px;
+}
+
+.loading {
+    height: 100%;
+    width: 100%;
 }

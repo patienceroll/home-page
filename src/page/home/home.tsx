@@ -47,7 +47,9 @@ const Home: React.FC = memo(() => {
                     </div>
                 ))
             ) : (
-                <Loading />
+                <div className={Style.loading}>
+                    <Loading />
+                </div>
             )}
         </div>
     );
