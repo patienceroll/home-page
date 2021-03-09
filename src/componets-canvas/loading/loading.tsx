@@ -6,7 +6,7 @@ import Style from "./loading.module.less";
 const duration = 666.667;
 
 /** 外部圆环循环周期 单位ms  */
-const outerDuration = 2000;
+const outerDuration = 1000;
 
 /** 内部圆半径 单位px */
 const Radius = 20;
@@ -48,8 +48,8 @@ const Loading = memo(
                     ctx.stroke();
                     ctx.closePath();
 
-                    const startLength = 0.66;
-                    let gradientLength = 0.83;
+                    const startLength = 0.36;
+                    let gradientLength = 0.63;
                     const gradientIncrementer = 0.05;
 
                     while (gradientLength - gradientIncrementer > -gradientIncrementer) {
