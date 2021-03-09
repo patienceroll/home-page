@@ -1,6 +1,6 @@
 import React, { memo, useContext } from "react";
 
-import HOME_SVG from "@src/assets/svg/home.svg";
+import PEOPLE from "@src/assets/svg/people.svg";
 
 import LayoutContext from "@src/layout/context/context";
 
@@ -38,7 +38,7 @@ const Header = memo(() => {
                     onClick={setShowAside.bind(null, !showAside)}
                     className={`${style.right_btn} shake_animate`}
                 >
-                    <HOME_SVG />
+                    <PEOPLE />
                     <span>关于</span>
                 </div>
             </div>
