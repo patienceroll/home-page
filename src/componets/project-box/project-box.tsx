@@ -19,7 +19,7 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
     return (
         <div className={Style.CT} onClick={onClick}>
             <div className={Style.CT_inner}>
-                {/* <img src={image} /> */}
+                <img src={image} />
 
                 <div className={Style.content_mask}>
                     <div className={Style.text}>

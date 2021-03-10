@@ -2,12 +2,37 @@
 
 .CT {
     display: flex;
+    align-content: flex-start;
     flex-wrap: wrap;
     height: 100%;
 }
 
 .pro_item {
-    flex-shrink: 0;
+    width: 20%;
+}
+
+@media screen and (max-width: 1700px) {
+    .pro_item {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 1700px) {
+    .pro_item {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 1008px) {
+    .pro_item {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 608px) {
+    .pro_item {
+        width: 100%;
+    }
 }
 
 .loading {

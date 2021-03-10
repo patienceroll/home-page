@@ -13,8 +13,6 @@ import Style from "./section.module.less";
 const Section = memo(() => {
     const {
         state: { showAside, showNav },
-        setShowAside,
-        setShowNav,
     } = useContext(LayoutContext);
 
     return (
@@ -37,7 +35,6 @@ const Section = memo(() => {
                         <Route children={<Page404 />} />
                     </Switch>
                 </Suspense>
-
             </div>
         </section>
     );
