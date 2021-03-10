@@ -13,6 +13,7 @@ const store = {
         while (i <= 20) {
             i++;
             yield {
+                id:i,
                 title: "气泡上升",
                 subtitle: "canvas",
                 url: "http://gsea.top/canvas/study/pop-up",
@@ -42,7 +43,7 @@ const Home: React.FC = memo(() => {
         <div className={Style.CT}>
             {list ? (
                 list.map(i => (
-                    <div key={i.title} className={Style.pro_item}>
+                    <div key={i.id} className={Style.pro_item}>
                         <ProjectBox {...i} />
                     </div>
                 ))
