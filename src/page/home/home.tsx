@@ -10,14 +10,14 @@ import Style from "./home.module.less";
 const store = {
     [Symbol.iterator]: function* () {
         let i = 1;
-        while (i <= 20) {
+        while (i <= 1) {
             i++;
             yield {
-                id:i,
-                title: "气泡上升",
-                subtitle: "canvas",
+                id: i,
+                title: "Canvas绘制气泡上升",
+                subTitle: "canvas",
                 url: "http://gsea.top/canvas/study/pop-up",
-                image: "https://img1.baidu.com/it/u=3832422639,2986198850&fm=26&fmt=auto&gp=0.jpg",
+                image: "http://gsea.top/image/20210310/popup-screen-shot.png",
             };
         }
     },

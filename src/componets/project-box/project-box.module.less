@@ -13,11 +13,69 @@
 
 .CT_inner {
     position: absolute;
+    width: 100%;
     top: -20px;
     left: 0;
     height: calc(100% + 20px);
-    img{
+    transition: top ease 300ms;
+    object-fit: cover;
+    object-position: center center;
+    img {
+        height: 100%;
+    }
+    .content_mask {
+        position: absolute;
+        display: flex;
+        align-items: center;
         width: 100%;
         height: 100%;
+        top: 0;
+        left: 0;
+        transition: opacity ease 300ms;
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &:hover {
+        top: 0;
+        .content_mask {
+            opacity: 1;
+        }
+
+        .text {
+            transform: translateY(50%);
+        }
+    }
+}
+
+.text {
+    flex: 1;
+    text-align: center;
+    transition: transform ease 300ms;
+    color: #fff;
+    padding: 0 5%;
+    font-size: 14px;
+    h2 {
+        font-size: 1.2em;
+        text-align: center;
+        margin: 0;
+        padding-bottom: 15px;
+    }
+
+    .sub_title {
+        position: relative;
+        font-size: 1.15em;
+        padding-top: 15px;
+        &::before {
+            display: inline-block;
+            content: "";
+            width: 20px;
+            height: 2px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            background-color: #fff;
+            transform: translateX(-50%);
+        }
     }
 }

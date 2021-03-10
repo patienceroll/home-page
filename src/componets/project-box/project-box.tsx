@@ -23,8 +23,8 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
 
                 <div className={Style.content_mask}>
                     <div className={Style.text}>
-                        <div>{title}</div>
-                        <div>{subTitle}</div>
+                        <h2 className="text_2_line_elips">{title}</h2>
+                        {subTitle && <div className={Style.sub_title}>{subTitle}</div>}
                     </div>
                 </div>
             </div>

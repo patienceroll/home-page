@@ -2,7 +2,7 @@
 export interface ProjectItem {
     id: number;
     title: string;
-    subtitle?: string;
+    subTitle?: string;
     url?: string;
     image: string;
 }
