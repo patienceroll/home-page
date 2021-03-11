@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 
-import Developing from "@src/componets-canvas/developing/developing";
+import Developing from "@src/componets/developing/developing";
 
 const PhotoAblum: FC = memo(() => {
     return (
