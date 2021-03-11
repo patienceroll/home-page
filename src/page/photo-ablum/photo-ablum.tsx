@@ -1,7 +1,13 @@
 import React, { FC, memo } from "react";
 
+import Developing from "@src/componets-canvas/developing/developing";
+
 const PhotoAblum: FC = memo(() => {
-    return <div>照片中心页面</div>;
+    return (
+        <div style={{ height: "100%" }}>
+            <Developing />
+        </div>
+    );
 });
 
 export default PhotoAblum;
