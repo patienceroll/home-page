@@ -4,34 +4,17 @@ import Loading from "@src/componets-canvas/loading/loading";
 import ProjectBox from "@src/componets/project-box/project-box";
 
 import * as Data from "./data";
-import MockData from "./mock-data";
+import Request from "./service";
 
 import Style from "./home.module.less";
-
-const store = {
-    [Symbol.iterator]: function* () {
-        let i = 0;
-        while (i < MockData.length) {
-            yield {
-                id: i,
-                ...MockData[i],
-            };
-            i++;
-        }
-    },
-};
 
 const Home: React.FC = memo(() => {
     const [list, setList] = useState<Data.ProjectItem[]>();
 
     const getList = useCallback(() => {
         setList(undefined);
-        new Promise(resolve => {
-            setTimeout(() => {
-                resolve(undefined);
-            }, 1000);
-        }).then(() => {
-            setList([...store]);
+        Request.GetHomeList().then(res => {
+            setList(res.data);
         });
     }, []);
 

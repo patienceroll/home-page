@@ -154,6 +154,9 @@ const config: Configuration = {
         host: "127.0.0.1",
         port: 1996,
         contentBase: "./dist",
+        proxy: {
+            '/api/v1': "http://gsea.top:3000",
+        },
     },
 };
 
