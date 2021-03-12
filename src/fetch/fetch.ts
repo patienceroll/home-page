@@ -45,12 +45,31 @@ const post: FetchType.Post = (path, params = {}) => {
         });
 };
 
+const postFormdata: FetchType.PostFormdata = (path, data) => {
+    return fetch(path, {
+        method: "POST",
+        body: data,
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then((res: FetchType.BaseResponse<any>) => {
+            if (res.code === 0) {
+                return res;
+            } else {
+                return Promise.reject();
+            }
+        });
+};
+
 /** 统一封装的请求 */
 const Fetch = {
     /** get请求方法 */
     get,
     /** post请求方法 */
     post,
+    /** formData发送 */
+    postFormdata,
 };
 
 export default Fetch;
