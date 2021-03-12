@@ -24,10 +24,33 @@ const get: FetchType.Get = (path, params = {}) => {
         });
 };
 
+const post: FetchType.Post = (path, params = {}) => {
+    params._timeStamp = +new Date();
+    return fetch(path, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(params),
+    })
+        .then(response => {
+            return response.json();
+        })
+        .then((res: FetchType.BaseResponse<any>) => {
+            if (res.code === 0) {
+                return res;
+            } else {
+                return Promise.reject();
+            }
+        });
+};
+
 /** 统一封装的请求 */
 const Fetch = {
     /** get请求方法 */
     get,
+    /** post请求方法 */
+    post,
 };
 
 export default Fetch;

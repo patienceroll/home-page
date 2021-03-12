@@ -8,6 +8,9 @@ declare namespace FetchType {
 
     /** get请求 */
     type Get = <T = any>(path: string, params?: Record<string, any>) => Promise<BaseResponse<T>>;
+
+    /** post请求 */
+    type Post = <T = any>(path: string, params?: Record<string, any>) => Promise<BaseResponse<T>>;
 }
 
 export = FetchType;
