@@ -62,6 +62,10 @@ const postFormdata: FetchType.PostFormdata = (path, data) => {
         });
 };
 
+const buildUrl = (url: string) => {
+    return `/api/v1/${url}`;
+};
+
 /** 统一封装的请求 */
 const Fetch = {
     /** get请求方法 */
@@ -70,6 +74,7 @@ const Fetch = {
     post,
     /** formData发送 */
     postFormdata,
+    buildUrl,
 };
 
 export default Fetch;
