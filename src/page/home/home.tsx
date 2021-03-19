@@ -14,7 +14,7 @@ const Home: React.FC = memo(() => {
     const getList = useCallback(() => {
         setList(undefined);
         Request.GetHomeList().then(res => {
-            setList(res.data);
+            setList(res.data.list);
         });
     }, []);
 

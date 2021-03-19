@@ -6,6 +6,14 @@ declare namespace FetchType {
         msg: string;
     };
 
+    /** 列表数据类型 */
+    type listType<T> = {
+        list: T[];
+        page: number;
+        perPage: number;
+        total: number;
+    };
+
     /** get请求 */
     type Get = <T = any>(path: string, params?: Record<string, any>) => Promise<BaseResponse<T>>;
 
