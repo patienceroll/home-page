@@ -5,7 +5,7 @@ import * as Data from "./data";
 const { get, buildUrl } = Fetch;
 
 /** 获取首页列表 */
-const GetHomeList = () => {
+const GetHomeList = (params: FetchType.BaseListParam) => {
     return get<FetchType.listType<Data.ProjectItem>>(buildUrl("home"));
 };
 

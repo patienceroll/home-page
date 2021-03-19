@@ -6,6 +6,11 @@ declare namespace FetchType {
         msg: string;
     };
 
+    type BaseListParam = {
+        page: number;
+        perPage: number;
+    };
+
     /** 列表数据类型 */
     type listType<T> = {
         list: T[];

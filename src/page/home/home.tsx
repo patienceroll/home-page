@@ -13,7 +13,7 @@ const Home: React.FC = memo(() => {
 
     const getList = useCallback(() => {
         setList(undefined);
-        Request.GetHomeList().then(res => {
+        Request.GetHomeList({ page: 1, perPage: 8 }).then(res => {
             setList(res.data.list);
         });
     }, []);
