@@ -6,7 +6,7 @@ const { get, buildUrl } = Fetch;
 
 /** 获取首页列表 */
 const GetHomeList = (params: FetchType.BaseListParam) => {
-    return get<FetchType.listType<Data.ProjectItem>>(buildUrl("home"));
+    return get<FetchType.listType<Data.ProjectItem>>(buildUrl("home"),params);
 };
 
 export default {
