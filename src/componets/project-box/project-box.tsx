@@ -1,4 +1,5 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
+import LazyLoad from "react-lazyload";
 
 import Style from "./project-box.module.less";
 interface ProjectBoxProps {
@@ -19,7 +20,7 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
     return (
         <div className={Style.CT} onClick={onClick}>
             <div className={Style.CT_inner}>
-                <img src={image} />
+                <LazyLoad children={<img src={image} />} />
 
                 <div className={Style.content_mask}>
                     <div className={Style.text}>
