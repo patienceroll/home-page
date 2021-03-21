@@ -2,13 +2,20 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    transform: translateY(300%);
+    transition: transform ease 1s, opacity ease 1s;
     cursor: pointer;
-
+    opacity: 0;
     &::after {
         content: "";
         display: block;
         padding: 28.125% 50%;
     }
+}
+
+.uped {
+    transform: none;
+    opacity: 1;
 }
 
 .CT_inner {
@@ -19,11 +26,6 @@
     height: calc(100% + 20px);
     transition: top ease 300ms;
 
-    :global {
-        .lazyload-wrapper {
-            height: 100%;
-        }
-    }
 
     img {
         height: 100%;

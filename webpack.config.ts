@@ -156,7 +156,7 @@ const config: Configuration = {
         contentBase: "./dist",
         proxy: {
             "/api/v1": {
-                target: "http://gsea.top:80",
+                target: "http://gsea.top",
                 changeOrigin: true,
             },
         },

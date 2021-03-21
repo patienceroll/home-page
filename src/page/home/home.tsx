@@ -23,9 +23,9 @@ const Home: React.FC = memo(() => {
     return (
         <div className={Style.CT}>
             {list ? (
-                list.map(i => (
+                list.map((i, index) => (
                     <div key={i.id} className={Style.pro_item}>
-                        <ProjectBox {...i} />
+                        <ProjectBox {...i} delayUp={index} />
                     </div>
                 ))
             ) : (
