@@ -26,7 +26,7 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
     useEffect(() => {
         setTimeout(() => {
             setUp(true);
-        }, delayUp * 50);
+        }, (delayUp + 1) * 50);
     }, []);
 
     return (
