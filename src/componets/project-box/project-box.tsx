@@ -18,9 +18,14 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
     const { title, subTitle, url, image, delayUp = 0 } = props;
 
     const [up, setUp] = useState(false);
+    const [load, setLoad] = useState(false);
 
     const onClick = () => {
         if (url) window.open(url);
+    };
+
+    const onLoad = (e: any) => {
+        setLoad(true);
     };
 
     useEffect(() => {
@@ -32,7 +37,11 @@ const ProjectBox = memo<ProjectBoxProps>(props => {
     return (
         <div className={`${Style.CT} ${up ? Style.uped : ""}`} onClick={onClick}>
             <div className={Style.CT_inner}>
-                <img src={image} />
+                <img
+                    src={image}
+                    className={`${Style.img} ${load ? Style.img_load : ""}`}
+                    onLoad={onLoad}
+                />
 
                 <div className={Style.content_mask}>
                     <div className={Style.text}>
