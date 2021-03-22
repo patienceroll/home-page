@@ -159,6 +159,10 @@ const config: Configuration = {
                 target: "http://gsea.top",
                 changeOrigin: true,
             },
+            "/upload": {
+                target: "http://gsea.top",
+                changeOrigin: true,
+            },
         },
     },
 };

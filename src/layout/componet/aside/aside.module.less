@@ -1,7 +1,9 @@
 @import "~@src/theme/theme";
 
 .contain {
+    box-sizing: border-box;
     position: fixed;
+    padding: 20px;
     top: @header_height;
     right: 0;
     width: 220px;
@@ -13,4 +15,37 @@
 
 .hide {
     right: -220px;
+}
+
+.link {
+    display: flex;
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 20px;
+    svg {
+        width: 28px !important;
+        height: 28px !important;
+        vertical-align: middle;
+        transform-origin: center bottom;
+    }
+    strong {
+        vertical-align: middle;
+    }
+}
+
+.github {
+    svg {
+        path {
+            transform: scale(0.58333333);
+        }
+    }
+}
+
+.link:hover {
+    background: linear-gradient(to right, #fff , #eee 80%);
+    :global {
+        svg {
+            animation: waggle_head 300ms linear;
+        }
+    }
 }
