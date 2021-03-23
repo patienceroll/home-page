@@ -17,5 +17,8 @@ export default {
         sourceType: "module",
     },
     plugins: ["react", "@typescript-eslint"],
-    rules: {},
+    rules: {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+    },
 };

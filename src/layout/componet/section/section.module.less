@@ -2,16 +2,19 @@
 
 .CT {
     position: relative;
-    min-width: 100vw;
+    min-width: calc(100vw - 8px);
+    margin-right: 8px;
     min-height: 100vh;
 }
 
 .CT_inner {
+    box-sizing: border-box;
     position: absolute;
     transition: left 0.6s ease;
     margin-top: @header_height;
     width: 100%;
     height: calc(100% - @header_height);
+    background-color: #F2F2F2;
     left: 0;
 }
 
