@@ -24,6 +24,9 @@ const PhotoBox = memo<PhotoBoxProps>(props => {
             <div className={Style.content_view}>
                 <h2 className={Style.title}>{title}</h2>
             </div>
+            <div className={Style.mask_content}>
+
+            </div>
         </div>
     );
 });

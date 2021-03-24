@@ -1,4 +1,6 @@
 .CT {
+    position: relative;
+    overflow: hidden;
     background-color: #efefef;
 }
 
@@ -14,13 +16,35 @@
     object-fit: cover;
     top: -20px;
     left: 0;
+    transition: top ease 300ms;
 }
 
-.content_view{
+.content_view {
     padding: 40px 6.25%;
     background-color: #fff;
 }
 
-.title{
+.title {
     font-size: 1.8rem;
+}
+
+.mask_content {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 20px);
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity ease 300ms, top ease 300ms;
+}
+
+.CT:hover {
+    .mask_content {
+        opacity: 1;
+        top: 0;
+    }
+    .img {
+        top: 0;
+    }
 }
