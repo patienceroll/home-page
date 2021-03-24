@@ -48,7 +48,7 @@ const Header = memo(() => {
                 </div>
             </div>
 
-            <div className={style.title}>Zzz...</div>
+            <div className={style.title}>逆流而上的鲑鱼</div>
 
             <div className={style.right_btn_CT}>
                 <div
