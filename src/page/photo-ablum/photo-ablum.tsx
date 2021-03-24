@@ -1,6 +1,9 @@
 import React, { FC, memo } from "react";
 
 import PhotoBox from "@src/componets/photo-box/photo-box";
+import Developing from "@src/componets/developing/developing";
+
+
 
 import Style from "./photo-ablum.module.less";
 
@@ -22,11 +25,12 @@ const obj = {
 const PhotoAblum: FC = memo(() => {
     return (
         <div className={Style.CT}>
-            {[...obj].map(i => (
+            {/* {[...obj].map(i => (
                 <div className={Style.item}>
                     <PhotoBox {...i} />
                 </div>
-            ))}
+            ))} */}
+            <Developing />
         </div>
     );
 });

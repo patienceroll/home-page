@@ -21,8 +21,8 @@ const PhotoBox = memo<PhotoBoxProps>(props => {
             <div className={Style.img_view}>
                 <Img src={cover} className={Style.img} />
             </div>
-            <div className={Style.content_view} style={{ height: Math.random() * 150 + 100 }}>
-                空白
+            <div className={Style.content_view}>
+                <h2 className={Style.title}>{title}</h2>
             </div>
         </div>
     );

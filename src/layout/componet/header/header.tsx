@@ -5,7 +5,7 @@ import PEOPLE from "@src/assets/svg/people.svg";
 
 import LayoutContext from "@src/layout/context/context";
 
-import style from "./header.module.less";
+import Style from "./header.module.less";
 
 const NavText: {
     [key: string]: string;
@@ -28,12 +28,12 @@ const Header = memo(() => {
     const NavTextKey = pathname.substr(1).split("/")[0];
 
     return (
-        <header className={style.header}>
+        <header className={Style.header}>
             <div
                 onClick={setShowNav.bind(null, !showNav)}
-                className={`${style.nav_icon_CT}${showNav ? ` ${style.clicked}` : ""}`}
+                className={`${Style.nav_icon_CT}${showNav ? ` ${Style.clicked}` : ""}`}
             >
-                <div className={style.nav_icon}>
+                <div className={Style.nav_icon}>
                     {/* 导航按钮 */}
                     <ul>
                         <li />
@@ -43,17 +43,19 @@ const Header = memo(() => {
                     </ul>
                 </div>
 
-                <div className={`${style.nav_text} waggle_animate`}>
+                <div className={`${Style.nav_text} waggle_animate`}>
                     {NavText[NavTextKey] || "导航"}
                 </div>
             </div>
 
-            <div className={style.title}>逆流而上的鲑鱼</div>
+            <div className={`${Style.title} text_elips`} title="逆流而上的鲑鱼">
+                逆流而上的鲑鱼
+            </div>
 
-            <div className={style.right_btn_CT}>
+            <div className={`${Style.right_btn_CT} text_elips`}>
                 <div
                     onClick={setShowAside.bind(null, !showAside)}
-                    className={`${style.right_btn} shake_animate`}
+                    className={`${Style.right_btn} shake_animate`}
                 >
                     <PEOPLE />
                     <span>关于</span>
