@@ -1,4 +1,5 @@
 import React, { memo, useContext } from "react";
+import { useLocation } from "react-router-dom";
 
 import PEOPLE from "@src/assets/svg/people.svg";
 
@@ -6,12 +7,26 @@ import LayoutContext from "@src/layout/context/context";
 
 import style from "./header.module.less";
 
+const NavText: {
+    [key: string]: string;
+} = {
+    home: "主页",
+    "photo-ablum": "相册",
+    "study-record": "学习记录",
+    "canvas-center": "Canvas",
+};
+
 const Header = memo(() => {
     const {
         state: { showNav, showAside },
         setShowNav,
         setShowAside,
     } = useContext(LayoutContext);
+
+    const { pathname } = useLocation();
+    /** 获取 pathname 的第一级 */
+    const NavTextKey = pathname.substr(1).split("/")[0];
+
     return (
         <header className={style.header}>
             <div
@@ -28,7 +43,9 @@ const Header = memo(() => {
                     </ul>
                 </div>
 
-                <div className={`${style.nav_text} waggle_animate`}>导航</div>
+                <div className={`${style.nav_text} waggle_animate`}>
+                    {NavText[NavTextKey] || "导航"}
+                </div>
             </div>
 
             <div className={style.title}>Zzz...</div>
