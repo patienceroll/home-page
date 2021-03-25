@@ -22,10 +22,12 @@ const PhotoBox = memo<PhotoBoxProps>(props => {
                 <Img src={cover} className={Style.img} />
             </div>
             <div className={Style.content_view}>
-                <h2 className={Style.title}>{title}</h2>
+                <h2>{title}</h2>
+                <p>{describe}</p>
             </div>
             <div className={Style.mask_content}>
-
+                <h2>{title}</h2>
+                <span>{date}</span>
             </div>
         </div>
     );

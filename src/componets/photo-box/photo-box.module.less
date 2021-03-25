@@ -20,23 +20,36 @@
 }
 
 .content_view {
-    padding: 40px 6.25%;
+    padding: 30px 6.25%;
     background-color: #fff;
-}
-
-.title {
-    font-size: 1.8rem;
+    h2 {
+        font-size: 1.05em;
+        line-height: 1.3em;
+        margin: 0;
+    }
+    p {
+        font-size: 1em;
+        margin: 0;
+    }
 }
 
 .mask_content {
+    display: flex;
     position: absolute;
-    top: -20px;
     left: 0;
     width: 100%;
     height: calc(100% + 20px);
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
-    transition: opacity ease 300ms, top ease 300ms;
+    transition: opacity ease 300ms;
+    h2 {
+        font-size: 1.05em;
+        margin: 0;
+    }
+    p {
+        font-size: 1em;
+        margin: 0;
+    }
 }
 
 .CT:hover {

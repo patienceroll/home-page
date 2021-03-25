@@ -8,7 +8,7 @@ import Style from "./photo-ablum.module.less";
 const obj = {
     [Symbol.iterator]: function* () {
         let i = 0;
-        while (i <= 20) {
+        while (i <= 6) {
             yield {
                 title: `$第${i}张`,
                 date: "2021.7.14",
