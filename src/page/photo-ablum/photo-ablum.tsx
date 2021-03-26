@@ -8,13 +8,14 @@ import Style from "./photo-ablum.module.less";
 const obj = {
     [Symbol.iterator]: function* () {
         let i = 0;
-        while (i <= 10) {
+        while (i <= 17) {
             yield {
-                title: `$第${new Array(i).fill('撒旦爱神的箭')}张`,
+                title: `$第${new Array(i).fill("撒旦爱神的箭")}张`,
                 date: "2021.7.14",
                 cover: "/upload/image/2021322/1616385223269-管理端.jpg",
                 describe: new Array(i).fill(" 简答题的时候,直接是空数组"),
                 id: i,
+                delayUp: i + 1,
             };
             i++;
         }

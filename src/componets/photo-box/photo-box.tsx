@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Img from "@src/componets/img/img";
 
 import Style from "./photo-box.module.less";
@@ -12,12 +12,25 @@ type PhotoBoxProps = {
     date: string;
     /** 描述 */
     describe: string;
+    /**
+     * 延时时间单位上滑
+     * 单位 number * 100ms
+     */
+    delayUp?: number;
 };
 
 const PhotoBox = memo<PhotoBoxProps>(props => {
-    const { title, cover, date, describe } = props;
+    const { title, cover, date, describe, delayUp = 0 } = props;
+    const [up, setUp] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setUp(true);
+        }, (delayUp + 1) * 50);
+    }, []);
+
     return (
-        <div className={Style.CT}>
+        <div className={`${Style.CT} ${up ? Style.uped : ""}`}>
             <div className={Style.img_view}>
                 <Img src={cover} className={Style.img} />
             </div>
@@ -30,7 +43,9 @@ const PhotoBox = memo<PhotoBoxProps>(props => {
                     <div className={Style.title_wrap}>
                         <h2 className="text_2_line_elips">{title}</h2>
                     </div>
-                    <div className={Style.date_wrap}><span>{date}</span></div>
+                    <div className={Style.date_wrap}>
+                        <span>{date}</span>
+                    </div>
                 </div>
             </div>
         </div>
