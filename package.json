@@ -58,10 +58,5 @@
     "webpack": "4.44.2",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
