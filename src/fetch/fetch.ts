@@ -1,6 +1,6 @@
-import FetchType from "./data";
+import type Data from "./data";
 
-const get: FetchType.Get = (path, params = {}) => {
+const get: Data.Get = (path, params = {}) => {
     params._timeStamp = +new Date();
     let query = "";
     Object.keys(params).forEach(key => {
@@ -15,7 +15,7 @@ const get: FetchType.Get = (path, params = {}) => {
         .then(response => {
             return response.json();
         })
-        .then((res: FetchType.BaseResponse<any>) => {
+        .then((res: Data.BaseResponse<any>) => {
             if (res.code === 0) {
                 return res;
             } else {
@@ -24,7 +24,7 @@ const get: FetchType.Get = (path, params = {}) => {
         });
 };
 
-const post: FetchType.Post = (path, params = {}) => {
+const post: Data.Post = (path, params = {}) => {
     params._timeStamp = +new Date();
     return fetch(path, {
         method: "POST",
@@ -36,7 +36,7 @@ const post: FetchType.Post = (path, params = {}) => {
         .then(response => {
             return response.json();
         })
-        .then((res: FetchType.BaseResponse<any>) => {
+        .then((res: Data.BaseResponse<any>) => {
             if (res.code === 0) {
                 return res;
             } else {
@@ -45,7 +45,7 @@ const post: FetchType.Post = (path, params = {}) => {
         });
 };
 
-const postFormdata: FetchType.PostFormdata = (path, data) => {
+const postFormdata: Data.PostFormdata = (path, data) => {
     return fetch(path, {
         method: "POST",
         body: data,
@@ -53,7 +53,7 @@ const postFormdata: FetchType.PostFormdata = (path, data) => {
         .then(response => {
             return response.json();
         })
-        .then((res: FetchType.BaseResponse<any>) => {
+        .then((res: Data.BaseResponse<any>) => {
             if (res.code === 0) {
                 return res;
             } else {
@@ -65,8 +65,6 @@ const postFormdata: FetchType.PostFormdata = (path, data) => {
 const buildUrl = (url: string) => {
     return `/api/v1/${url}`;
 };
-
-
 
 /** 统一封装的请求 */
 const Fetch = {
