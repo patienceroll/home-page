@@ -25,9 +25,9 @@ const Section = memo(() => {
                 <Suspense fallback={<Loading />}>
                     <Switch>
                         <Route exact path="/" children={<Redirect to="/home" />} />
-                        {RouteData.map(item => (
+                        {RouteData.map((item, index) => (
                             <Route
-                                key={item.name || Math.random()}
+                                key={`${index}`}
                                 {...item.RouteProps}
                                 component={item.component}
                             />

@@ -19,6 +19,14 @@ const RouteData: RouteTypeItem[] = [
         RouteProps: { path: "/home" },
     },
     {
+        to: "/photo-ablum/:id",
+        component: lazy(
+            () =>
+                import(/** photo-ablum-detail */ "@src/page/photo-ablum/photo-detail/photo-detail")
+        ),
+        RouteProps: { path: "/photo-ablum/:id" },
+    },
+    {
         name: "相册",
         to: "/photo-ablum",
         component: lazy(
@@ -26,14 +34,6 @@ const RouteData: RouteTypeItem[] = [
                 import(/**  webpackChunkName: "photo-ablum"  */ "@src/page/photo-ablum/photo-ablum")
         ),
         RouteProps: { path: "/photo-ablum", exact: true },
-    },
-    {
-        to: "/photo-ablum/:id",
-        component: lazy(
-            () =>
-                import(/** photo-ablum-detail */ "@src/page/photo-ablum/photo-detail/photo-detail")
-        ),
-        RouteProps: { path: "/photo-ablum/:id" },
     },
     {
         name: "学习记录",

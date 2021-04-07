@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useContext, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Loading from "@src/componets-canvas/loading/loading";
@@ -9,7 +9,7 @@ import * as Request from "../service";
 
 import Style from "./photo-detail.module.less";
 
-const PhotoDetail: FC = memo(() => {
+const PhotoDetail = memo(() => {
     const { id } = useParams<{ id: string }>();
     const [detail, setDetail] = useState<Data.PhotoDetail>();
 
@@ -22,12 +22,16 @@ const PhotoDetail: FC = memo(() => {
 
     useEffect(getDetail, [getDetail]);
 
-    return detail ? (
-        <div className={Style.CT}>
-            <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
+    return (
+        <div>
+            {detail ? (
+                <div className={Style.CT}>
+                    <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
+                </div>
+            ) : (
+                <Loading />
+            )}
         </div>
-    ) : (
-        <Loading />
     );
 });
 

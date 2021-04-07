@@ -8,7 +8,7 @@ import Nav from "@src/layout/componet/nav/nav";
 import Section from "@src/layout/componet/section/section";
 import Aside from "@src/layout/componet/aside/aside";
 
-import Style from './layout.module.less';
+import Style from "./layout.module.less";
 
 const Layout: FC = () => {
     const { pathname } = useLocation();
@@ -28,14 +28,14 @@ const Layout: FC = () => {
         setShowNav(false);
     }, []);
 
-
     const onClickMask = () => {
         setShowAside(false);
         setShowNav(false);
     };
 
-
-    useEffect(ShowSection, [pathname]);
+    useEffect(() => {
+        ShowSection();
+    }, [ShowSection, pathname]);
 
     return (
         <LayoutContext.Provider value={{ state: { showAside, showNav }, setShowNav, setShowAside }}>
