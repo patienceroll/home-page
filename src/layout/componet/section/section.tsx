@@ -27,7 +27,7 @@ const Section = memo(() => {
                         <Route exact path="/" children={<Redirect to="/home" />} />
                         {RouteData.map(item => (
                             <Route
-                                key={item.name}
+                                key={item.name || Math.random()}
                                 {...item.RouteProps}
                                 component={item.component}
                             />

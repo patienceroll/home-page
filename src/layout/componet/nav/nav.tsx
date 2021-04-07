@@ -19,6 +19,7 @@ const Nav = memo(() => {
             {RouteData.map(item => {
                 const { name, to, props = {} } = item;
                 const className = `${style.link} ${pathname === to ? style.link_current : ""}`;
+                if (name === undefined) return;
                 return (
                     <Link key={name} className={className} to={to} {...props}>
                         <div>{name}</div>

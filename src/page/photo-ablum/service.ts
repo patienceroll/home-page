@@ -9,3 +9,8 @@ const { get, buildUrl } = Fetch;
 export const GetPhotoList = (params: FetchData.BaseListParam) => {
     return get<FetchData.listType<Data.PhotoListItem>>(buildUrl(`photo`), params);
 };
+
+/** 获取相册详情 */
+export const GetPhoto = (params: { id: number | string }) => {
+    return get<Data.PhotoDetail>(buildUrl(`photo/${params.id}`));
+};
