@@ -27,7 +27,7 @@ const PhotoBox = memo<PhotoBoxProps>(props => {
         setTimeout(() => {
             setUp(true);
         }, (delayUp + 1) * 50);
-    }, []);
+    }, [delayUp]);
 
     return (
         <div className={`${Style.CT} ${up ? Style.uped : ""}`}>

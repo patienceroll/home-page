@@ -22,16 +22,12 @@ const PhotoDetail = memo(() => {
 
     useEffect(getDetail, [getDetail]);
 
-    return (
-        <div>
-            {detail ? (
-                <div className={Style.CT}>
-                    <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
-                </div>
-            ) : (
-                <Loading />
-            )}
+    return detail ? (
+        <div className={Style.CT}>
+            <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
         </div>
+    ) : (
+        <Loading />
     );
 });
 
