@@ -24,7 +24,7 @@ const PhotoDetail = memo(() => {
 
     return detail ? (
         <div className={Style.CT}>
-            <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
+            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
         </div>
     ) : (
         <Loading />
