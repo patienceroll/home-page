@@ -5,7 +5,7 @@
   "main": "app.tsx",
   "scripts": {
     "start": "set MODE=development&&yarn  webpack serve",
-    "build": "set MODE=production&&yarn webpack --config webpack.config.ts",
+    "build": "set MODE=production&&yarn webpack --config webpack.config-product.ts",
     "commit": "npx git-cz"
   },
   "repository": {

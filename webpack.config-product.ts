@@ -6,6 +6,7 @@ const MODE = process.env.MODE as "development" | "production";
 
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 
 const FileNameType = "[name]-[contenthash:8]";
@@ -92,6 +93,8 @@ const config: Configuration = {
         ],
     },
     plugins: [
+        // 删除dist
+        new CleanWebpackPlugin({}),
         // 输出 index.html 文件
         new HtmlWebpackPlugin({
             template: "public/index.html",
