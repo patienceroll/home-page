@@ -18,6 +18,7 @@ const config: Configuration = {
         publicPath: "./",
         filename: FileNameType + ".js",
         chunkFilename: FileNameType + ".js",
+    
     },
     mode: MODE,
     resolve: {
@@ -143,7 +144,7 @@ const config: Configuration = {
                 // 抽离出公用的业务代码
                 common: {
                     name: "common~venders",
-                    chunks: "initial",
+                    chunks: "async",
                     minChunks: 2,
                     priority: 1,
                     reuseExistingChunk: true,

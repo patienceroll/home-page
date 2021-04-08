@@ -1,17 +1,19 @@
 import React, { lazy } from "react";
 import { LinkProps, RouteProps } from "react-router-dom";
 
-const Home = import(/**  webpackChunkName: "home"  */ "@src/page/home/home");
+const Home = import(/**  webpackChunkName: "home"  */ /* webpackMode: lazy */ "@src/page/home/home");
 const PhotoAblumDetail = import(
-    /** photo-ablum-detail */ "@src/page/photo-ablum/photo-detail/photo-detail"
+    /** photo-ablum-detail */ /* webpackMode: lazy */ "@src/page/photo-ablum/photo-detail/photo-detail"
 );
 const PhotoAblum = import(
-    /**  webpackChunkName: "photo-ablum"  */ "@src/page/photo-ablum/photo-ablum"
+    /**  webpackChunkName: "photo-ablum"  */ /* webpackMode: lazy */ "@src/page/photo-ablum/photo-ablum"
 );
 const StudyRecord = import(
-    /**  webpackChunkName: "study-record"  */ "@src/page/study-record/study-record"
+    /**  webpackChunkName: "study-record"  */ /* webpackMode: lazy */ "@src/page/study-record/study-record"
 );
-const CanvasCenter = import(/**  webpackChunkName: "canvas-center"  */ "@src/page/canvas/canvas");
+const CanvasCenter = import(
+    /**  webpackChunkName: "canvas-center"  */ /* webpackMode: lazy */ "@src/page/canvas/canvas"
+);
 
 type RouteTypeItem = {
     name?: string;

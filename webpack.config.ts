@@ -116,38 +116,6 @@ const config: Configuration = {
         }),
     ],
 
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                // 抽离出 react、react-dom
-                react: {
-                    name: "react~vender",
-                    test: /[\\/]node_modules[\\/]react/,
-                    chunks: "all",
-                    enforce: true,
-                    priority: 10,
-                    reuseExistingChunk: true,
-                },
-                // 抽离出 node_module 插件
-                venders: {
-                    name: "venders",
-                    test: /[\\/]node_modules/,
-                    chunks: "all",
-                    enforce: true,
-                    priority: 2,
-                    reuseExistingChunk: true,
-                },
-                // 抽离出公用的业务代码
-                common: {
-                    name: "common~venders",
-                    chunks: "initial",
-                    minChunks: 2,
-                    priority: 1,
-                    reuseExistingChunk: true,
-                },
-            },
-        },
-    },
     devServer: {
         host: "127.0.0.1",
         port: 1996,
