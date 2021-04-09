@@ -1,8 +1,6 @@
 import path from "path";
 import LoaderUtils from "loader-utils";
 
-const MODE = process.env.MODE as "development" | "production";
-
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const FileNameType = "[name]-[contenthash:8]";
@@ -15,7 +13,7 @@ const config = {
         filename: FileNameType + ".js",
         chunkFilename: FileNameType + ".js",
     },
-    mode: MODE,
+    mode: "development",
     resolve: {
         extensions: [".tsx", ".ts", ".js", ".jsx"],
         alias: {
