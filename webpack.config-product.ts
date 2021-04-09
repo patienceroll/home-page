@@ -1,4 +1,3 @@
-import { Configuration, loader } from "webpack";
 import path from "path";
 import LoaderUtils from "loader-utils";
 
@@ -6,19 +5,16 @@ const MODE = process.env.MODE as "development" | "production";
 
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import CopyWebpackPlugin from "copy-webpack-plugin";
 
 const FileNameType = "[name]-[contenthash:8]";
 
-const config: Configuration = {
+const config = {
     entry: "./src/app.tsx",
     output: {
         path: path.resolve(__dirname, "dist"),
         publicPath: "./",
         filename: FileNameType + ".js",
         chunkFilename: FileNameType + ".js",
-    
     },
     mode: MODE,
     resolve: {
@@ -52,12 +48,12 @@ const config: Configuration = {
                         options: {
                             modules: {
                                 compileType: "module",
-                                // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
                                 getLocalIdent: (
-                                    context: loader.LoaderContext,
+                                    context: { resourcePath: string },
                                     _localIdentName: string,
                                     localName: string
-                                ) => {
+                                ): string => {
                                     const hash = LoaderUtils.getHashDigest(
                                         Buffer.from(context.resourcePath + localName),
                                         "md5",
@@ -94,25 +90,25 @@ const config: Configuration = {
         ],
     },
     plugins: [
-        // 删除dist
-        new CleanWebpackPlugin({}),
+        // // 删除dist
+        // new CleanWebpackPlugin({}),
         // 输出 index.html 文件
         new HtmlWebpackPlugin({
             template: "public/index.html",
         }),
         // 复制文件夹
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: "public",
-                    to: "",
-                    filter: path => {
-                        if (/index.html$/.test(path)) return false;
-                        return true;
-                    },
-                },
-            ],
-        }),
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //         {
+        //             from: "public",
+        //             to: "",
+        //             filter: (path: string) => {
+        //                 if (/index.html$/.test(path)) return false;
+        //                 return true;
+        //             },
+        //         },
+        //     ],
+        // }),
         // 分离出 css 文件
         new MiniCssExtractPlugin({
             filename: FileNameType + ".css",
