@@ -1,33 +1,5 @@
 import React, { lazy } from 'react';
-import { LinkProps, RouteProps } from 'react-router-dom';
-
-const Home = lazy(
-  () => import(/**  webpackChunkName: "home"  */ /* webpackMode: lazy */ '@src/page/home/home'),
-);
-const PhotoAblumDetail = lazy(
-  () =>
-    import(
-      /** photo-ablum-detail */ /* webpackMode: lazy */ '@src/page/photo-ablum/photo-detail/photo-detail'
-    ),
-);
-const PhotoAblum = lazy(
-  () =>
-    import(
-      /**  webpackChunkName: "photo-ablum"  */ /* webpackMode: lazy */ '@src/page/photo-ablum/photo-ablum'
-    ),
-);
-const StudyRecord = lazy(
-  () =>
-    import(
-      /**  webpackChunkName: "study-record"  */ /* webpackMode: lazy */ '@src/page/study-record/study-record'
-    ),
-);
-const CanvasCenter = lazy(
-  () =>
-    import(
-      /**  webpackChunkName: "canvas-center"  */ /* webpackMode: lazy */ '@src/page/canvas/canvas'
-    ),
-);
+import type { LinkProps, RouteProps } from 'react-router-dom';
 
 type RouteTypeItem = {
   name?: string;
@@ -39,26 +11,34 @@ type RouteTypeItem = {
 const RouteData: RouteTypeItem[] = [
   {
     name: '主页',
-    component: Home,
+    component: lazy(() => import(/**  webpackChunkName: "home"  */ '@src/page/home/home')),
     RouteProps: { path: '/home' },
   },
   {
-    component: PhotoAblumDetail,
+    component: lazy(
+      () => import(/** photo-ablum-detail */ '@src/page/photo-ablum/photo-detail/photo-detail'),
+    ),
     RouteProps: { path: '/photo-ablum/:id' },
   },
   {
     name: '相册',
-    component: PhotoAblum,
+    component: lazy(
+      () => import(/**  webpackChunkName: "photo-ablum"  */ '@src/page/photo-ablum/photo-ablum'),
+    ),
     RouteProps: { path: '/photo-ablum', exact: true },
   },
   {
     name: '学习记录',
-    component: StudyRecord,
+    component: lazy(
+      () => import(/**  webpackChunkName: "study-record"  */ '@src/page/study-record/study-record'),
+    ),
     RouteProps: { path: '/study-record' },
   },
   {
     name: 'canvas',
-    component: CanvasCenter,
+    component: lazy(
+      () => import(/**  webpackChunkName: "canvas-center"  */ '@src/page/canvas/canvas'),
+    ),
     RouteProps: { path: '/canvas-center' },
   },
 ];
