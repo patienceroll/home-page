@@ -1,6 +1,6 @@
 const path = require('path');
 
-const FileNameType = '[name]-[contenthash:8]';
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/app.tsx',
@@ -54,7 +54,21 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    // 复制文件夹
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: '',
+          filter: (path) => {
+            if (/index.html$/.test(path)) return false;
+            return true;
+          },
+        },
+      ],
+    }),
+  ],
 
   devServer: {
     host: '127.0.0.1',

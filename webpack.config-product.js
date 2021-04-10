@@ -3,6 +3,7 @@ const LoaderUtils = require('loader-utils');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const FileNameType = '[name]-[contenthash:8]';
 
@@ -90,18 +91,18 @@ module.exports = {
       template: 'public/index.html',
     }),
     // 复制文件夹
-    // new CopyWebpackPlugin({
-    //     patterns: [
-    //         {
-    //             from: "public",
-    //             to: "",
-    //             filter: (path: string) => {
-    //                 if (/index.html$/.test(path)) return false;
-    //                 return true;
-    //             },
-    //         },
-    //     ],
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: '',
+          filter: (path) => {
+            if (/index.html$/.test(path)) return false;
+            return true;
+          },
+        },
+      ],
+    }),
     // 分离出 css 文件
     new MiniCssExtractPlugin({
       filename: FileNameType + '.css',
