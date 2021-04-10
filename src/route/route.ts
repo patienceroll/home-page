@@ -16,7 +16,10 @@ const RouteData: RouteTypeItem[] = [
   },
   {
     component: lazy(
-      () => import(/** photo-ablum-detail */ '@src/page/photo-ablum/photo-detail/photo-detail'),
+      () =>
+        import(
+          /** webpackChunkName: "photo-ablum-detail" */ '@src/page/photo-ablum/photo-detail/photo-detail'
+        ),
     ),
     RouteProps: { path: '/photo-ablum/:id' },
   },
