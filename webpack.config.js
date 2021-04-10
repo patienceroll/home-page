@@ -4,12 +4,6 @@ const FileNameType = '[name]-[contenthash:8]';
 
 module.exports = {
   entry: './src/app.tsx',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
-    filename: FileNameType + '.js',
-    chunkFilename: FileNameType + '.js',
-  },
   mode: 'development',
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
