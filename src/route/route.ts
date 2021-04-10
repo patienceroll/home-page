@@ -1,75 +1,66 @@
-import React, { lazy } from "react";
-import { LinkProps, RouteProps } from "react-router-dom";
+import React, { lazy } from 'react';
+import { LinkProps, RouteProps } from 'react-router-dom';
 
-const Home = import(/**  webpackChunkName: "home"  */ /* webpackMode: lazy */ "@src/page/home/home");
-const PhotoAblumDetail = import(
-    /** photo-ablum-detail */ /* webpackMode: lazy */ "@src/page/photo-ablum/photo-detail/photo-detail"
+const Home = lazy(
+  () => import(/**  webpackChunkName: "home"  */ /* webpackMode: lazy */ '@src/page/home/home'),
 );
-const PhotoAblum = import(
-    /**  webpackChunkName: "photo-ablum"  */ /* webpackMode: lazy */ "@src/page/photo-ablum/photo-ablum"
+const PhotoAblumDetail = lazy(
+  () =>
+    import(
+      /** photo-ablum-detail */ /* webpackMode: lazy */ '@src/page/photo-ablum/photo-detail/photo-detail'
+    ),
 );
-const StudyRecord = import(
-    /**  webpackChunkName: "study-record"  */ /* webpackMode: lazy */ "@src/page/study-record/study-record"
+const PhotoAblum = lazy(
+  () =>
+    import(
+      /**  webpackChunkName: "photo-ablum"  */ /* webpackMode: lazy */ '@src/page/photo-ablum/photo-ablum'
+    ),
 );
-const CanvasCenter = import(
-    /**  webpackChunkName: "canvas-center"  */ /* webpackMode: lazy */ "@src/page/canvas/canvas"
+const StudyRecord = lazy(
+  () =>
+    import(
+      /**  webpackChunkName: "study-record"  */ /* webpackMode: lazy */ '@src/page/study-record/study-record'
+    ),
+);
+const CanvasCenter = lazy(
+  () =>
+    import(
+      /**  webpackChunkName: "canvas-center"  */ /* webpackMode: lazy */ '@src/page/canvas/canvas'
+    ),
 );
 
 type RouteTypeItem = {
-    name?: string;
-    props?: Omit<LinkProps, "to">;
-    to: LinkProps["to"];
-    RouteProps: RouteProps;
-    /** 如果为false不显示在菜单栏 */
-    menu?: false;
-    component: React.LazyExoticComponent<React.FC<any> | React.ComponentClass<any>>;
+  name?: string;
+  Linkprops?: Omit<LinkProps, 'to'>;
+  RouteProps: Omit<RouteProps, 'path'> & { path: string };
+  component: React.LazyExoticComponent<React.FC<{}>>;
 };
 
 const RouteData: RouteTypeItem[] = [
-    {
-        name: "主页",
-        to: "/home",
-        component: lazy(() => {
-            console.log("home");
-            return Home;
-        }),
-        RouteProps: { path: "/home" },
-    },
-    {
-        to: "/photo-ablum/:id",
-        component: lazy(() => {
-            console.log("photo-ablum/:id");
-            return PhotoAblumDetail;
-        }),
-        RouteProps: { path: "/photo-ablum/:id" },
-    },
-    {
-        name: "相册",
-        to: "/photo-ablum",
-        component: lazy(() => {
-            console.log("photo-ablum");
-            return PhotoAblum;
-        }),
-        RouteProps: { path: "/photo-ablum", exact: true },
-    },
-    {
-        name: "学习记录",
-        to: "/study-record",
-        component: lazy(() => {
-            console.log("study-record");
-            return StudyRecord;
-        }),
-        RouteProps: { path: "/study-record" },
-    },
-    {
-        name: "canvas",
-        to: "/canvas-center",
-        component: lazy(() => {
-            console.log("canvas-center");
-            return CanvasCenter;
-        }),
-        RouteProps: { path: "/canvas-center" },
-    },
+  {
+    name: '主页',
+    component: Home,
+    RouteProps: { path: '/home' },
+  },
+  {
+    component: PhotoAblumDetail,
+    RouteProps: { path: '/photo-ablum/:id' },
+  },
+  {
+    name: '相册',
+    component: PhotoAblum,
+    RouteProps: { path: '/photo-ablum', exact: true },
+  },
+  {
+    name: '学习记录',
+    component: StudyRecord,
+    RouteProps: { path: '/study-record' },
+  },
+  {
+    name: 'canvas',
+    component: CanvasCenter,
+    RouteProps: { path: '/canvas-center' },
+  },
 ];
 
 export default RouteData;
