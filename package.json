@@ -5,7 +5,7 @@
   "main": "app.tsx",
   "scripts": {
     "start": "yarn  webpack serve",
-    "build": "yarn webpack --config webpack.config-product.ts",
+    "build": "yarn webpack --config webpack.config-product.js",
     "commit": "npx git-cz"
   },
   "repository": {
@@ -28,19 +28,16 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",
-    "@types/loader-utils": "^2.0.2",
-    "@types/mini-css-extract-plugin": "^1.4.1",
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
-    "@types/webpack": "^5.28.0",
-    "@types/webpack-dev-server": "^3.11.3",
     "css-loader": "^5.2.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "less": "^4.1.1",
     "less-loader": "^8.0.0",
+    "loader-utils": "^2.0.0",
     "mini-css-extract-plugin": "^1.4.1",
     "ts-loader": "^8.1.0",
     "ts-node": "^9.1.1",

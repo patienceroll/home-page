@@ -1,12 +1,12 @@
-import path from 'path';
-import LoaderUtils from 'loader-utils';
+const path = require('path');
+const LoaderUtils = require('loader-utils');
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const FileNameType = '[name]-[contenthash:8]';
 
-const config = {
+module.exports = {
   entry: './src/app.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -46,11 +46,7 @@ const config = {
             options: {
               modules: {
                 compileType: 'module',
-                getLocalIdent: (
-                  context: { resourcePath: string },
-                  _localIdentName: string,
-                  localName: string,
-                ): string => {
+                getLocalIdent: (context, _localIdentName, localName) => {
                   const hash = LoaderUtils.getHashDigest(
                     Buffer.from(context.resourcePath + localName),
                     'md5',
@@ -161,5 +157,3 @@ const config = {
     },
   },
 };
-
-export default config;
