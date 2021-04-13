@@ -142,19 +142,4 @@ module.exports = {
       },
     },
   },
-  devServer: {
-    host: '127.0.0.1',
-    port: 1996,
-    contentBase: './dist',
-    proxy: {
-      '/api/v1': {
-        target: 'http://gsea.top',
-        changeOrigin: true,
-      },
-      '/upload': {
-        target: 'http://gsea.top',
-        changeOrigin: true,
-      },
-    },
-  },
 };

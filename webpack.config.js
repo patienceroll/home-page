@@ -1,9 +1,18 @@
 const path = require('path');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const FileNameType = '[name]-[contenthash:8]';
 
 module.exports = {
   entry: './src/app.tsx',
+  output: {
+    path: path.resolve(__dirname, 'dev'),
+    publicPath: '/',
+    filename: FileNameType + '.js',
+    chunkFilename: FileNameType + '.js',
+  },
   mode: 'development',
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
@@ -17,11 +26,20 @@ module.exports = {
       {
         test: /\.less$/,
         exclude: [/\.module\.less$/],
-        use: ['css-loader', 'less-loader'],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.module\.less$/,
         use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           {
             loader: 'css-loader',
             options: {
@@ -60,7 +78,6 @@ module.exports = {
       patterns: [
         {
           from: 'public',
-          to: '',
           filter: (path) => {
             if (/index.html$/.test(path)) return false;
             return true;
@@ -68,12 +85,20 @@ module.exports = {
         },
       ],
     }),
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+    }),
+    // 分离出 css 文件
+    new MiniCssExtractPlugin({
+      filename: FileNameType + '.css',
+      chunkFilename: FileNameType + '.css',
+    }),
   ],
 
   devServer: {
     host: '127.0.0.1',
     port: 1996,
-    contentBase: './dist',
+    contentBase: 'dev',
     proxy: {
       '/api/v1': {
         target: 'http://gsea.top',
