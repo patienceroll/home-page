@@ -4,6 +4,10 @@ const LoaderUtils = require('loader-utils');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+const isAnalyse = process.env.analyse === 'true';
 
 const FileNameType = '[name]-[contenthash:8]';
 
@@ -85,7 +89,7 @@ module.exports = {
   },
   plugins: [
     // // 删除dist
-    // new CleanWebpackPlugin({}),
+    new CleanWebpackPlugin({}),
     // 输出 index.html 文件
     new HtmlWebpackPlugin({
       template: 'public/index.html',
@@ -108,10 +112,14 @@ module.exports = {
       filename: FileNameType + '.css',
       chunkFilename: FileNameType + '.css',
     }),
-  ],
+  ].concat(
+    // 分析包
+    isAnalyse ? new BundleAnalyzerPlugin({ analyzerMode: 'static' }) : [],
+  ),
 
   optimization: {
     splitChunks: {
+      minChunks: 2,
       cacheGroups: {
         // 抽离出 react、react-dom
         react: {
@@ -134,7 +142,7 @@ module.exports = {
         // 抽离出公用的业务代码
         common: {
           name: 'common~venders',
-          chunks: 'async',
+          chunks: 'all',
           minChunks: 2,
           priority: 1,
           reuseExistingChunk: true,
