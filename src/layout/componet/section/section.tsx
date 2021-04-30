@@ -26,7 +26,11 @@ const Section = memo(() => {
           <Switch>
             <Route exact path="/" children={<Redirect to="/home" />} />
             {RouteData.map((item, index) => (
-              <Route key={`${index}`} {...item.RouteProps} component={item.component} />
+              <Route
+                key={`${index}`}
+                {...item.RouteProps}
+                component={useMemo(() => lazy(item.component), [])}
+              />
             ))}
             <Route children={<Page404 />} />
           </Switch>

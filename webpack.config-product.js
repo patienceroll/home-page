@@ -1,5 +1,6 @@
 const path = require('path');
 const LoaderUtils = require('loader-utils');
+const Webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,12 +13,15 @@ const isAnalyse = process.env.analyse === 'true';
 const FileNameType = '[name]-[contenthash:8]';
 
 module.exports = {
-  entry: './src/app.tsx',
+  entry: {
+    main: './src/app.tsx',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: './',
     filename: FileNameType + '.js',
-    chunkFilename: FileNameType + '.js',
+    // chunkFilename: FileNameType + '.js',
+    chunkFilename: '[name]-[contenthash:8].js',
   },
   mode: 'production',
   resolve: {
