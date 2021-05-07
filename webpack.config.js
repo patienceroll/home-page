@@ -87,6 +87,11 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+      title: 'patience',
+      cdn: {
+        css: [],
+        js: [],
+      },
     }),
     // 分离出 css 文件
     new MiniCssExtractPlugin({

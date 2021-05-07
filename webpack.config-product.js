@@ -1,6 +1,5 @@
 const path = require('path');
 const LoaderUtils = require('loader-utils');
-const Webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -20,8 +19,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: './',
     filename: FileNameType + '.js',
-    // chunkFilename: FileNameType + '.js',
-    chunkFilename: '[name]-[contenthash:8].js',
+    chunkFilename: FileNameType + '.js',
   },
   mode: 'production',
   resolve: {
@@ -91,12 +89,26 @@ module.exports = {
       },
     ],
   },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    'react-router-dom': 'ReactRouterDOM',
+  },
   plugins: [
     // // 删除dist
     new CleanWebpackPlugin({}),
     // 输出 index.html 文件
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+      title: 'patience',
+      cdn: {
+        css: [],
+        js: [
+          'https://unpkg.com/react@17/umd/react.production.min.js',
+          'https://unpkg.com/react-dom@17/umd/react-dom.production.min.js',
+          'https://cdn.bootcdn.net/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js',
+        ],
+      },
     }),
     // 复制文件夹
     new CopyWebpackPlugin({
@@ -125,24 +137,6 @@ module.exports = {
     splitChunks: {
       minChunks: 2,
       cacheGroups: {
-        // 抽离出 react、react-dom
-        react: {
-          name: 'react~vender',
-          test: /[\\/]node_modules[\\/]react/,
-          chunks: 'all',
-          enforce: true,
-          priority: 10,
-          reuseExistingChunk: true,
-        },
-        // 抽离出 node_module 插件
-        venders: {
-          name: 'venders',
-          test: /[\\/]node_modules/,
-          chunks: 'all',
-          enforce: true,
-          priority: 2,
-          reuseExistingChunk: true,
-        },
         // 抽离出公用的业务代码
         common: {
           name: 'common~venders',

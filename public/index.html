@@ -7,11 +7,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>patience</title>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
 </head>
 
 <body>
     <div id="root"></div>
+    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+        <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+        <% } %>
 </body>
 
 </html>
