@@ -4,7 +4,7 @@ import Loading from '@src/componets-canvas/loading/loading';
 import ProjectBox from '@src/componets/project-box/project-box';
 
 import * as Data from './data';
-import Request from './service';
+import * as Request from './service';
 
 import Style from './home.module.less';
 
