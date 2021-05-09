@@ -1,7 +1,21 @@
-import type Data from './data';
+import { startPace } from '@src/componets/loading-bar/pace';
 
 export const buildUrl = (url: string) => {
   return `/api/v1/${url}`;
+};
+
+/** 列表基本请求参数 */
+export type ListParamBase = {
+  page: number;
+  perPage: number;
+};
+
+/** 列表响应类型 */
+export type List<T> = {
+  list: T[];
+  page: number;
+  perPage: number;
+  total: number;
 };
 
 /** 通用响应数据类型 */
@@ -58,9 +72,11 @@ export const GetResponse = <T>(
   data?: Record<string, any>,
   requestInit?: Omit<RequestInit, 'method' | 'body'>,
 ) => {
+  const pace = startPace();
   return Get(url, data, requestInit)
     .then((res) => res.json())
     .then((res: BaseResponse<T>) => {
+      pace.endPace();
       if (res.code === 0) {
         return res;
       }

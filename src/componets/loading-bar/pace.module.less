@@ -1,0 +1,15 @@
+@import '~@src/theme/theme.less';
+
+.pace {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: @max_z_index + 1;
+}
+
+.progress {
+  background-color: #000;
+  height: 4px;
+  transition: width ease 150ms;
+}

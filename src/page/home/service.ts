@@ -1,9 +1,8 @@
 import { GetResponse, buildUrl } from '@src/fetch/fetch';
-import type FetchData from '@src/fetch/data';
+import type { ListParamBase, List } from '@src/fetch/fetch';
 import * as Data from './data';
 
 /** 获取首页列表 */
-export const GetHomeList = (params: FetchData.BaseListParam) => {
-  return GetResponse<FetchData.listType<Data.ProjectItem>>(buildUrl('home'), params);
+export const GetHomeList = (params: ListParamBase) => {
+  return GetResponse<List<Data.ProjectItem>>(buildUrl('home'), params);
 };
-
