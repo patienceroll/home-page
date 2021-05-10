@@ -69,6 +69,7 @@ const Pace: FC<PaceProps> = ({ callBack }) => {
       }
       const onEnd = () => {
         unmountComponentAtNode(element);
+        element.remove();
       };
       showEndAnimation(width, onEnd);
     },
@@ -84,16 +85,23 @@ const Pace: FC<PaceProps> = ({ callBack }) => {
 };
 
 export const startPace = () => {
-  const element = document.createElement('div');
-  document.body.appendChild(element);
+  const paced = document.getElementById('zxl-pace');
   let methods: Methods = { end() {} };
+
   const getPaceMethods: GetPaceMethods = (o) => {
     methods = o;
   };
-  render(<Pace callBack={getPaceMethods} />, element);
-  return {
-    endPace() {
-      methods.end(element);
-    },
-  };
+
+  if (paced) {
+  } else {
+    const element = document.createElement('div');
+    element.id = 'zxl-pace';
+    document.body.appendChild(element);
+    render(<Pace callBack={getPaceMethods} />, element);
+    return {
+      endPace() {
+        methods.end(element);
+      },
+    };
+  }
 };

@@ -83,6 +83,7 @@ export const GetResponse = <T>(
       return Promise.reject(res);
     })
     .catch((err) => {
+      pace.endPace();
       console.error(err);
       return Promise.reject(err);
     });
