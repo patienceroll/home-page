@@ -10,15 +10,16 @@ type GetPaceMethods = (m: Methods) => void;
 
 type PaceProps = {
   callBack: GetPaceMethods;
+  step?: number;
 };
 
 /** 步进等待时间 单位 ms */
 const WAIT_TIME = 6000;
 
-const Pace: FC<PaceProps> = ({ callBack }) => {
+const Pace: FC<PaceProps> = ({ callBack, step = 0 }) => {
   const timeStamp = useRef(+new Date());
   const animate = useRef(NaN);
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(step);
 
   const porgress = useCallback(() => {
     const during = +new Date() - timeStamp.current;
@@ -79,7 +80,7 @@ const Pace: FC<PaceProps> = ({ callBack }) => {
 
   return (
     <div className={Style.pace}>
-      <div className={Style.progress} style={{ width: `${width}vw` }} />
+      <div className={Style.progress} id="zxl-pace-progress" style={{ width: `${width}vw` }} />
     </div>
   );
 };
@@ -87,21 +88,29 @@ const Pace: FC<PaceProps> = ({ callBack }) => {
 export const startPace = () => {
   const paced = document.getElementById('zxl-pace');
   let methods: Methods = { end() {} };
+  let setp = 0;
 
   const getPaceMethods: GetPaceMethods = (o) => {
     methods = o;
   };
 
   if (paced) {
-  } else {
-    const element = document.createElement('div');
-    element.id = 'zxl-pace';
-    document.body.appendChild(element);
-    render(<Pace callBack={getPaceMethods} />, element);
-    return {
-      endPace() {
-        methods.end(element);
-      },
-    };
+    const paceProgress = document.getElementById('zxl-pace-progress');
+    if (paceProgress) {
+      setp = Number(paceProgress.style.width.replace(/[vw]/g, ''));
+    }
+    unmountComponentAtNode(paced);
+    paced.remove();
   }
+
+  const element = document.createElement('div');
+  element.id = 'zxl-pace';
+  document.body.appendChild(element);
+  render(<Pace callBack={getPaceMethods} step={setp} />, element);
+
+  return {
+    endPace() {
+      methods.end(element);
+    },
+  };
 };
