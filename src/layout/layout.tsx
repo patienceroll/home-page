@@ -4,10 +4,10 @@ import { useLocation } from 'react-router-dom';
 
 import LayoutContext from '@src/layout/context/context';
 
-import Header from '@src/layout/componet/header/header';
-import Nav from '@src/layout/componet/nav/nav';
-import Section from '@src/layout/componet/section/section';
-import Aside from '@src/layout/componet/aside/aside';
+import Header from '@src/layout/header/header';
+import Nav from '@src/layout/nav/nav';
+import Section from '@src/layout/section/section';
+import Aside from '@src/layout/aside/aside';
 
 import Style from './layout.module.less';
 

@@ -4,6 +4,9 @@ import IMAGE from "@src/assets/svg/image.svg";
 
 import Style from "./img.module.less";
 
+
+
+
 type ImgProps = React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
