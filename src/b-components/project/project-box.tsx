@@ -34,7 +34,7 @@ const ProjectBox = memo<ProjectBoxProps>((props) => {
   return (
     <div className={`${Style.CT} ${up ? Style.uped : ''} colum_font_size`} onClick={onClick}>
       <div className={Style.CT_inner}>
-        <img src={image} />
+        <Image src={image} />
 
         <div className={Style.content_mask}>
           <div className={Style.text}>
