@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import Loading from '@src/componets-canvas/loading/loading';
-import ProjectBox from '@src/componets/project-box/project-box';
+import ProjectBox from '@src/b-components/project/project-box';
 
 import * as Data from './data';
 import * as Request from './service';

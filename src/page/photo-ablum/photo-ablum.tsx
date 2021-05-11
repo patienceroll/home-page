@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import Loading from "@src/componets-canvas/loading/loading";
-import PhotoBox from "@src/componets/photo-box/photo-box";
+import PhotoBox from "@src/b-components/photo/photo-box";
 
 import * as Request from "./service";
 import type Data from "./data";

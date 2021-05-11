@@ -1,4 +1,4 @@
-import { startPace } from '@src/componets/loading-bar/pace';
+import { startPace } from '@src/componets/pace/pace';
 
 export const buildUrl = (url: string) => {
   return `/api/v1/${url}`;
