@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-import Img from "@src/componets/img/img";
+import Img from "@src/componets/img";
 
 import Style from "./photo-box.module.less";
 

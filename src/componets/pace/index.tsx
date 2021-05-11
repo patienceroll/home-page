@@ -3,7 +3,7 @@ import { FC, useCallback, useEffect, useRef } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import React, { useState } from 'react';
 
-import Style from './pace.module.less';
+import Style from './index.module.less';
 
 type Methods = { end: (element: HTMLDivElement) => void };
 type GetPaceMethods = (m: Methods) => void;
