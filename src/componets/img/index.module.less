@@ -1,12 +1,9 @@
-.img {
-  transition: opacity 300ms ease;
-}
-
-.img_show {
-  opacity: 1;
-}
-
 .hide {
-  display: none;
   opacity: 0;
+  transition: opacity 0s;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 300ms ease;
 }

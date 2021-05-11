@@ -1,4 +1,4 @@
-import type { FC, CSSProperties } from 'react';
+import { FC, useEffect } from 'react';
 import React, { useState } from 'react';
 
 import IMAGE from '@src/assets/svg/image.svg';
@@ -12,47 +12,41 @@ type ImgProps = React.DetailedHTMLProps<
 >;
 
 const Img: FC<ImgProps> = (props) => {
-  const { onLoad, className, style = {}, onError } = props;
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const newOnLoad: React.ReactEventHandler<HTMLImageElement> = (e) => {
-    if (onLoad) onLoad(e);
-    setLoading(true);
+  const { className = '', style = {}, src } = props;
+  const [animating, setAnimating] = useState(false);
+  const [newSrc, setNewSrc] = useState<ImgProps['src']>(IMAGE as unknown as string);
+
+  const getImgBlob = () => {
+    if (src) {
+      return fetch(src, { method: 'GET', headers: { 'content-type': 'image/*' } })
+        .then((res) => res.blob())
+        .then((blob) => {
+          return URL.createObjectURL(blob);
+        });
+    }
+    return Promise.reject();
   };
 
-  const newonError: React.ReactEventHandler<HTMLImageElement> = (e) => {
-    if (onError) onError(e);
-    setError(true);
-  };
-
-  let newStyle: CSSProperties = {};
-  if (loading) {
-    newStyle = {
-      ...style,
-      backgroundImage: loading ? `url(${IMAGE})` : undefined,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center center',
-      backgroundSize: '50% 50%',
-    };
-  } else if (error) {
-    newStyle = {
-      ...style,
-      backgroundImage: loading ? `url(${IMAGE_ERROR})` : undefined,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center center',
-      backgroundSize: '50% 50%',
-    };
-  } else {
-    newStyle = { ...style };
-  }
+  useEffect(() => {
+    getImgBlob()
+      .then((url) => {
+        setAnimating(true);
+        setNewSrc(url);
+        setTimeout(() => {
+          setAnimating(false);
+        }, 16);
+      })
+      .catch(() => {
+        setNewSrc(IMAGE_ERROR as unknown as string);
+      });
+  }, []);
 
   return (
     <img
       {...props}
-      className={`${Style.img} ${loading ? Style.hide : Style.img_show} ${className || ''}`}
-      style={newStyle}
-      onLoad={newOnLoad}
-      onError={newonError}
+      src={newSrc}
+      className={`${Style.hide} ${animating ? '' : Style.show} ${className}`}
+      style={style}
     />
   );
 };
