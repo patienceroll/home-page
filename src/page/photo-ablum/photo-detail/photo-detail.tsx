@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import Loading from "@src/componets-canvas/loading/loading";
+import Loading from "@src/canvas-componets/loading/loading";
 
 import * as Data from "../data";
 

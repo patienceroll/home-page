@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import LayoutContext from '@src/layout/context/context';
 
-import Loading from '@src/componets-canvas/loading/loading';
+import Loading from '@src/canvas-componets/loading/loading';
 import Page404 from '@src/layout/404/404';
 
 import RouteData from '@src/route/route';
