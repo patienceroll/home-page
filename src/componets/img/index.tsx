@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import React, { useState } from 'react';
 
 import IMAGE from '@src/assets/svg/image.svg';
@@ -11,10 +11,10 @@ type ImgProps = React.DetailedHTMLProps<
   HTMLImageElement
 >;
 
-const Img: FC<ImgProps> = (props) => {
-  const { className = '', style = {}, src } = props;
-  const [animating, setAnimating] = useState(false);
+const Img = forwardRef<HTMLImageElement, ImgProps>((props, ref) => {
+  const { src } = props;
   const [newSrc, setNewSrc] = useState<ImgProps['src']>(IMAGE as unknown as string);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const getImgBlob = () => {
     if (src) {
@@ -28,27 +28,43 @@ const Img: FC<ImgProps> = (props) => {
   };
 
   useEffect(() => {
-    getImgBlob()
-      .then((url) => {
-        setAnimating(true);
-        setNewSrc(url);
-        setTimeout(() => {
-          setAnimating(false);
-        }, 16);
-      })
-      .catch(() => {
-        setNewSrc(IMAGE_ERROR as unknown as string);
-      });
+    if (imgRef.current) {
+      const { current } = imgRef;
+      const DomTransition = current.style.transition;
+      const DomOpacity = current.style.opacity;
+
+      const AwaitTime = (time: number) =>
+        new Promise<void>((res) => {
+          setTimeout(() => {
+            res();
+          }, time);
+        });
+
+      getImgBlob()
+        .then((url) => {
+          current.style.opacity = '0';
+          current.src = url;
+          return AwaitTime(16);
+        })
+        .then(() => {
+          current.style.transition = 'opacity 300ms ease';
+
+          current.style.opacity = '1';
+          return AwaitTime(300);
+        })
+        .then(() => {
+          current.style.opacity = DomOpacity;
+          current.style.transition = DomTransition;
+        })
+        .catch(() => {
+          setNewSrc(IMAGE_ERROR as unknown as string);
+        });
+    }
   }, []);
 
-  return (
-    <img
-      {...props}
-      src={newSrc}
-      className={`${Style.hide} ${animating ? '' : Style.show} ${className}`}
-      style={style}
-    />
-  );
-};
+  useImperativeHandle(ref, () => imgRef.current as HTMLImageElement);
+
+  return <img {...props} src={newSrc} ref={imgRef} />;
+});
 
 export default Img;
