@@ -1,4 +1,5 @@
 import { startPace } from '@src/componets/pace';
+import message from '@src/componets/message';
 
 export const buildUrl = (url: string) => {
   return `/api/v1/${url}`;
@@ -84,6 +85,7 @@ export const GetResponse = <T>(
     })
     .catch((err) => {
       pace.endPace();
+      message.error('小小服务器出了点问题').then(() => message.unknow('刷新一下或许会好哦'));
       return Promise.reject(err);
     });
 };
@@ -117,6 +119,8 @@ export const PostResponse = <T>(
     })
     .catch((err) => {
       console.error(err);
+      message.error('小小服务器出了点问题').then(() => message.unknow('请重新操作一次吧'));
+
       return Promise.reject(err);
     });
 };

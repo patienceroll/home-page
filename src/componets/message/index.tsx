@@ -20,30 +20,34 @@ let MapIndex = 0;
  * 创建一个 DOM 元素,并挂在到 document 上
  */
 const createElement: () => [HTMLElement, number] = () => {
+  MapIndex++;
   const element = document.createElement('div');
   element.id = `zxl-message-${MapIndex}`;
   document.body.appendChild(element);
   MessageMap.set(MapIndex, element);
-  return [element, MapIndex++];
+  return [element, MapIndex];
 };
 
 /** 因为清除DOM会展示 300ms 的动画,所以延迟清除dom */
-const destoryElement = (element: HTMLElement, mapIndex: number) => {
-  // 如果 element 已经被 destoryAll 清除,则不执行
-  if (MessageMap.has(mapIndex)) {
-    const msg = element.firstElementChild as HTMLElement;
-    if (msg) {
-      msg.style.transform = null as unknown as string;
-      msg.style.opacity = null as unknown as string;
+const destoryElement = (element: HTMLElement, mapIndex: number) =>
+  new Promise<void>((res) => {
+    // 如果 element 已经被 destoryAll 清除,则不执行
+    if (MessageMap.has(mapIndex)) {
+      const msg = element.firstElementChild as HTMLElement;
+      if (msg) {
+        msg.style.transform = null as unknown as string;
+        msg.style.opacity = null as unknown as string;
+      }
+      setTimeout(() => {
+        unmountComponentAtNode(element);
+        element.remove();
+        if (mapIndex) MessageMap.delete(mapIndex);
+        res();
+      }, 300);
+    } else {
+      res();
     }
-    setTimeout(() => {
-      unmountComponentAtNode(element);
-      element.remove();
-      if (mapIndex) MessageMap.delete(mapIndex);
-    }, 300);
-  }
-};
-
+  });
 const WaitTime = (time: number) =>
   new Promise<void>((res) => {
     setTimeout(() => {
@@ -57,9 +61,7 @@ const showMessage = (option: Option, icon: React.ReactElement<SVGAElement>) => {
   const watieTime = (time || 3000) + 300;
   const [element, index] = createElement();
   render(<Message text={text} icon={icon} index={MessageMap.size} />, element);
-  return WaitTime(watieTime).then(() => {
-    destoryElement(element, index);
-  });
+  return WaitTime(watieTime).then(() => destoryElement(element, index));
 };
 
 const success = (text: string, time?: number) => showMessage({ text, time }, <Success />);
