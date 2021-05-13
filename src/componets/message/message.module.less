@@ -1,3 +1,34 @@
+@import '~@src/theme/theme.less';
+
 .ct {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 16px;
   position: fixed;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -100%);
+  z-index: @max_z_index;
+  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%),
+    0 9px 28px 8px rgb(0 0 0 / 5%);
+  transition: opacity ease 300ms, transform ease 300ms, top ease 300ms;
+}
+
+.icon {
+  margin: 0;
+  vertical-align: middle;
+  svg {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
+}
+
+.text {
+  vertical-align: middle;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 8px;
+  white-space: nowrap;
 }
