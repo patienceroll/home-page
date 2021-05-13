@@ -80,11 +80,10 @@ export const GetResponse = <T>(
       if (res.code === 0) {
         return res;
       }
-      return Promise.reject(res);
+      return res;
     })
     .catch((err) => {
       pace.endPace();
-      console.error(err);
       return Promise.reject(err);
     });
 };
@@ -114,7 +113,7 @@ export const PostResponse = <T>(
       if (res.code === 0) {
         return res;
       }
-      return Promise.reject(res);
+      return res;
     })
     .catch((err) => {
       console.error(err);
