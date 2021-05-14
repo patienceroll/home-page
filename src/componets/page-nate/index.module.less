@@ -1,0 +1,39 @@
+.ct {
+  display: flex;
+  padding: 20px 30px;
+  justify-content: space-between;
+  > a {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    position: relative;
+  }
+}
+
+.bor() {
+  content: '';
+  width: 10px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: #171717;
+  position: absolute;
+}
+
+.previous {
+  &::before {
+    .bor();
+    
+  }
+  &::after {
+    .bor();
+  }
+}
+
+.nextId {
+  &::before {
+    .bor();
+  }
+  &::after {
+    .bor();
+  }
+}

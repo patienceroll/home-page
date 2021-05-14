@@ -1,34 +1,39 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import Loading from "@src/canvas-componets/loading/loading";
+import Loading from '@src/canvas-componets/loading/loading';
+import PageNate from '@src/componets/page-nate';
 
-import * as Data from "../data";
+import * as Data from '../data';
 
-import * as Request from "../service";
+import * as Request from '../service';
 
-import Style from "./photo-detail.module.less";
+import Style from './photo-detail.module.less';
 
 const PhotoDetail = memo(() => {
-    const { id } = useParams<{ id: string }>();
-    const [detail, setDetail] = useState<Data.PhotoDetail>();
+  const { id } = useParams<{ id: string }>();
+  const [detail, setDetail] = useState<Data.PhotoDetail>();
 
-    const getDetail = useCallback(() => {
-        setDetail(undefined);
-        Request.GetPhoto({ id }).then(res => {
-            setDetail(res.data);
-        });
-    }, [id]);
+  const getDetail = useCallback(() => {
+    setDetail(undefined);
+    Request.GetPhoto({ id }).then((res) => {
+      setDetail(res.data);
+    });
+  }, [id]);
 
-    useEffect(getDetail, [getDetail]);
+  useEffect(getDetail, [getDetail]);
 
-    return detail ? (
-        <div className={Style.CT}>
-            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }} />
-        </div>
-    ) : (
-        <Loading />
-    );
+  return detail ? (
+    <div className={Style.CT}>
+      <PageNate />
+      <div
+        className="ql-editor"
+        dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }}
+      />
+    </div>
+  ) : (
+    <Loading />
+  );
 });
 
 export default PhotoDetail;

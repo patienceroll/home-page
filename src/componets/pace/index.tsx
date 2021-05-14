@@ -116,7 +116,7 @@ export const startPace = () => {
 
   return {
     endPace() {
-      methods.end(element).then(() => {
+      return methods.end(element).then(() => {
         document.body.style.transform = 'unset';
       });
     },
