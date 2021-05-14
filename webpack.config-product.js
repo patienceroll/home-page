@@ -74,7 +74,16 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack', 'file-loader'],
+        use: [
+          '@svgr/webpack',
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'svg',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -83,6 +92,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'images',
+              name: '[name].[ext]',
             },
           },
         ],
