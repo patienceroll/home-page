@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import Style from './index.module.less';
 
-type Methods = { end: (element: HTMLDivElement) => void };
+type Methods = { end: (element: HTMLDivElement) => Promise<void> };
 type GetPaceMethods = (m: Methods) => void;
 
 type PaceProps = {
@@ -23,7 +23,6 @@ const Pace: FC<PaceProps> = ({ callBack, step = 0 }) => {
 
   const porgress = useCallback(() => {
     const during = +new Date() - timeStamp.current;
-
     /** 如果没有超过等待时间 100% */
     if (during < WAIT_TIME) {
       setWidth((during / WAIT_TIME) * 100);
@@ -56,23 +55,25 @@ const Pace: FC<PaceProps> = ({ callBack, step = 0 }) => {
     if (90 <= currentWidth) {
       setTimeout(() => {
         setWidth(100);
-        setTimeout(() => {
-          onEnd();
-        }, 150);
+        setTimeout(onEnd, 150);
       }, 150);
     }
   }, []);
 
   callBack({
     end(element) {
+      // 清除当前动画
       if (animate.current) {
         cancelAnimationFrame(animate.current);
       }
-      const onEnd = () => {
-        unmountComponentAtNode(element);
-        element.remove();
-      };
-      showEndAnimation(width, onEnd);
+      return new Promise<void>((res) => {
+        const onEnd = () => {
+          unmountComponentAtNode(element);
+          element.remove();
+          res();
+        };
+        showEndAnimation(width, onEnd);
+      });
     },
   });
 
@@ -87,13 +88,14 @@ const Pace: FC<PaceProps> = ({ callBack, step = 0 }) => {
 
 export const startPace = () => {
   const paced = document.getElementById('zxl-pace');
-  let methods: Methods = { end() {} };
+  let methods: Methods = { end: () => Promise.resolve() };
   let setp = 0;
 
   const getPaceMethods: GetPaceMethods = (o) => {
     methods = o;
   };
 
+  // 如果已经出现进度条,重新生成进度条,但是请求接着卸载的进度走
   if (paced) {
     const paceProgress = document.getElementById('zxl-pace-progress');
     if (paceProgress) {
@@ -106,11 +108,17 @@ export const startPace = () => {
   const element = document.createElement('div');
   element.id = 'zxl-pace';
   document.body.appendChild(element);
+
+  // 需要展示动画,body 向下移动
+  document.body.style.transform = 'translateY(4px)';
+
   render(<Pace callBack={getPaceMethods} step={setp} />, element);
 
   return {
     endPace() {
-      methods.end(element);
+      methods.end(element).then(() => {
+        document.body.style.transform = 'unset';
+      });
     },
   };
 };
