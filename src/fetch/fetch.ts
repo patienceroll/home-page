@@ -85,7 +85,7 @@ export const GetResponse = <T>(
     })
     .catch((err) => {
       pace.endPace();
-      message.error('小小服务器出了点问题').then(() => message.unknow('刷新一下或许会好哦'));
+      message.error('小小服务器出了点问题').then(() => message.unknow('刷新一下或许会解决哟~'));
       return Promise.reject(err);
     });
 };
@@ -119,7 +119,7 @@ export const PostResponse = <T>(
     })
     .catch((err) => {
       console.error(err);
-      message.error('小小服务器出了点问题').then(() => message.unknow('请重新操作一次吧'));
+      message.error('小小服务器出了点问题').then(() => message.unknow('请重新操作一次吧^-^'));
 
       return Promise.reject(err);
     });
