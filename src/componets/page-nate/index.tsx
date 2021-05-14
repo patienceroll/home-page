@@ -5,7 +5,7 @@ import Style from './index.module.less';
 const PageNate = memo(() => {
   return (
     <nav className={Style.ct}>
-      <a className={Style.previous} />
+      <a className={Style.previous} title="上一个" />
       <a>
         <li />
         <li />
@@ -17,7 +17,7 @@ const PageNate = memo(() => {
         <li />
         <li />
       </a>
-      <a className={Style.nextId} />
+      <a className={Style.nextId} title="下一个" />
     </nav>
   );
 });

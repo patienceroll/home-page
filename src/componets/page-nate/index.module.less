@@ -7,6 +7,7 @@
     width: 40px;
     height: 40px;
     position: relative;
+    cursor: pointer;
   }
 }
 
@@ -17,23 +18,59 @@
   border-radius: 1px;
   background-color: #171717;
   position: absolute;
+  transform-origin: center center;
+  left: 15px;
+  transition: transform ease 0.5s;
 }
 
 .previous {
   &::before {
     .bor();
-    
+    transform: rotate(-45deg);
+    top: 17px;
   }
   &::after {
     .bor();
+    top: 23px;
+    transform: rotate(45deg);
+  }
+
+  &:hover {
+    &::before {
+      .bor();
+      transform: rotate(-225deg);
+      top: 17px;
+    }
+    &::after {
+      .bor();
+      top: 23px;
+      transform: rotate(225deg);
+    }
   }
 }
 
 .nextId {
   &::before {
     .bor();
+    transform: rotate(45deg);
+    top: 17px;
   }
   &::after {
     .bor();
+    top: 23px;
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    &::before {
+      .bor();
+      transform: rotate(225deg);
+      top: 17px;
+    }
+    &::after {
+      .bor();
+      top: 23px;
+      transform: rotate(-225deg);
+    }
   }
 }

@@ -24,13 +24,15 @@ const PhotoDetail = memo(() => {
   useEffect(getDetail, [getDetail]);
 
   return detail ? (
-    <div className={Style.CT}>
-      <PageNate />
-      <div
-        className="ql-editor"
-        dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }}
-      />
-    </div>
+    <>
+      {/* <PageNate /> */}
+      <div className={Style.CT}>
+        <div
+          className="ql-editor"
+          dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }}
+        />
+      </div>
+    </>
   ) : (
     <Loading />
   );
