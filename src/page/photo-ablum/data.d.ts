@@ -16,7 +16,7 @@ type PhotoDetail = PhotoListItem & {
   /** 内容 被编码过 */
   content: string;
   /** 上一个数据的 id */
-  previous: string | null;
+  previousId: string | null;
   /** 下一个数据的id */
   nextId: string | null;
 };

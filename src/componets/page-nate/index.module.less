@@ -9,68 +9,183 @@
     position: relative;
     cursor: pointer;
   }
-}
 
-.bor() {
-  content: '';
-  width: 10px;
-  height: 2px;
-  border-radius: 1px;
-  background-color: #171717;
-  position: absolute;
-  transform-origin: center center;
-  left: 15px;
-  transition: transform ease 0.5s;
-}
-
-.previous {
-  &::before {
-    .bor();
-    transform: rotate(-45deg);
-    top: 17px;
-  }
-  &::after {
-    .bor();
-    top: 23px;
-    transform: rotate(45deg);
+  .bor() {
+    content: '';
+    width: 10px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #171717;
+    position: absolute;
+    transform-origin: center center;
+    left: 15px;
+    transition: transform ease 0.5s;
   }
 
-  &:hover {
+  .previous {
     &::before {
       .bor();
-      transform: rotate(-225deg);
+      transform: rotate(-45deg);
       top: 17px;
     }
     &::after {
       .bor();
       top: 23px;
-      transform: rotate(225deg);
+      transform: rotate(45deg);
+    }
+
+    &:hover {
+      &::before {
+        transform: rotate(-225deg);
+        top: 17px;
+      }
+      &::after {
+        top: 23px;
+        transform: rotate(225deg);
+      }
     }
   }
-}
 
-.nextId {
-  &::before {
-    .bor();
-    transform: rotate(45deg);
-    top: 17px;
-  }
-  &::after {
-    .bor();
-    top: 23px;
-    transform: rotate(-45deg);
-  }
-
-  &:hover {
+  .nextId {
     &::before {
       .bor();
-      transform: rotate(225deg);
+      transform: rotate(45deg);
       top: 17px;
     }
     &::after {
       .bor();
       top: 23px;
-      transform: rotate(-225deg);
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      &::before {
+        transform: rotate(225deg);
+        top: 17px;
+      }
+      &::after {
+        top: 23px;
+        transform: rotate(-225deg);
+      }
+    }
+  }
+
+  .disablePrevious {
+    cursor: default;
+    &::before {
+      background-color: #d1d1d1;
+    }
+    &::after {
+      background-color: #d1d1d1;
+    }
+    &:hover {
+      &::before {
+        transform: rotate(-45deg);
+      }
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .disableNext {
+    cursor: default;
+    &::before {
+      background-color: #d1d1d1;
+    }
+    &::after {
+      background-color: #d1d1d1;
+    }
+    &:hover {
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.middle {
+  padding: 10px;
+  box-sizing: border-box;
+  ul {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    > li {
+      position: absolute;
+      break-inside: avoid-column;
+      width: 6px;
+      background-color: #1a1a1a;
+      transition: height ease 300ms, transform ease 300ms;
+      &:nth-child(1) {
+        height: 7px;
+        top: 0;
+        left: 0;
+      }
+      &:nth-child(2) {
+        height: 10px;
+        top: 0;
+        left: 7px;
+      }
+      &:nth-child(3) {
+        height: 5px;
+        top: 0;
+        left: 14px;
+      }
+      &:nth-child(4) {
+        height: 7px;
+        top: 8px;
+        left: 0;
+      }
+      &:nth-child(5) {
+        height: 7px;
+        left: 7px;
+        top: 11px;
+      }
+      &:nth-child(6) {
+        height: 7px;
+        left: 14px;
+        top: 6px;
+      }
+      &:nth-child(7) {
+        height: 7px;
+        top: 8px;
+        left: 0;
+        transform: translateY(20px);
+      }
+      &:nth-child(8) {
+        height: 7px;
+        left: 7px;
+        top: 11px;
+        transform: translateY(20px);
+      }
+      &:nth-child(9) {
+        height: 7px;
+        left: 14px;
+        top: 6px;
+        transform: translateY(20px);
+      }
+    }
+  }
+  &:hover {
+    ul {
+      > li {
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6) {
+          height: 0px;
+        }
+        &:nth-child(7),
+        &:nth-child(8),
+        &:nth-child(9) {
+          transform: none;
+        }
+      }
     }
   }
 }
