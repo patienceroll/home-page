@@ -5,7 +5,7 @@ import Loading from '@src/canvas-componets/loading/loading';
 import PageNate from '@src/componets/page-nate';
 import type { PageNateProps } from '@src/componets/page-nate';
 
-import { AwaitTime } from '@src/helper/time';
+import { AwaitTime, AwatiScrollTop } from '@src/helper/time';
 
 import * as Data from '../data';
 
@@ -27,6 +27,7 @@ const PhotoDetail = memo(() => {
   const showAnimate = (params: { id: number | string; direction: 'left' | 'right' }) => {
     const { id, direction } = params;
     const { current } = contentRef;
+
     if (current) {
       GetDetail(id)
         .then((res) => {
@@ -44,16 +45,17 @@ const PhotoDetail = memo(() => {
   };
 
   const onChangePageNate: PageNateProps['onchange'] = (result) => {
-    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
-    if (result === 'left') {
-      history.replace(`/photo-ablum/${detail?.previousId}`);
-      if (detail?.previousId) showAnimate({ id: detail.previousId, direction: 'right' });
-    } else if (result === 'right') {
-      history.replace(`/photo-ablum/${detail?.nextId}`);
-      if (detail?.nextId) showAnimate({ id: detail.nextId, direction: 'left' });
-    } else {
-      history.push('/photo-ablum');
-    }
+    AwatiScrollTop().then(() => {
+      if (result === 'left') {
+        history.replace(`/photo-ablum/${detail?.previousId}`);
+        if (detail?.previousId) showAnimate({ id: detail.previousId, direction: 'right' });
+      } else if (result === 'right') {
+        history.replace(`/photo-ablum/${detail?.nextId}`);
+        if (detail?.nextId) showAnimate({ id: detail.nextId, direction: 'left' });
+      } else {
+        history.push('/photo-ablum');
+      }
+    });
   };
 
   useEffect(() => {
