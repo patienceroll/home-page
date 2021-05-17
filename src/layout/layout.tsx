@@ -9,8 +9,6 @@ import Nav from '@src/layout/nav/nav';
 import Section from '@src/layout/section/section';
 import Aside from '@src/layout/aside/aside';
 
-import message from '@src/componets/message';
-
 import Style from './layout.module.less';
 
 const Layout: FC = () => {

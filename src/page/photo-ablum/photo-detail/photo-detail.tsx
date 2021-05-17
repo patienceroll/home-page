@@ -1,10 +1,11 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useHistory, useLocation } from 'react-router';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Loading from '@src/canvas-componets/loading/loading';
 import PageNate from '@src/componets/page-nate';
 import type { PageNateProps } from '@src/componets/page-nate';
+
+import { AwaitTime } from '@src/helper/time';
 
 import * as Data from '../data';
 
@@ -15,25 +16,52 @@ import Style from './photo-detail.module.less';
 const PhotoDetail = memo(() => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+
   const [detail, setDetail] = useState<Data.PhotoDetail>();
 
-  const getDetail = useCallback(() => {
-    Request.GetPhoto({ id }).then((res) => {
-      setDetail(res.data);
-    });
-  }, [id]);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [animateDetail, setAnimateDetail] = useState<Data.PhotoDetail>();
+
+  const GetDetail = (id: number | string) => Request.GetPhoto({ id });
+
+  const showAnimate = (params: { id: number | string; direction: 'left' | 'right' }) => {
+    const { id, direction } = params;
+    const { current } = contentRef;
+    if (current) {
+      GetDetail(id)
+        .then((res) => {
+          setAnimateDetail(res.data);
+          current.style.transition = '';
+          current.style.transform = `translateX(${direction === 'left' ? -66.666666 : 0}%)`;
+          return AwaitTime(500).then(() => res.data);
+        })
+        .then((data) => {
+          setDetail(data);
+          current.style.transition = 'unset';
+          current.style.transform = '';
+        });
+    }
+  };
 
   const onChangePageNate: PageNateProps['onchange'] = (result) => {
+    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
     if (result === 'left') {
       history.replace(`/photo-ablum/${detail?.previousId}`);
+      if (detail?.previousId) showAnimate({ id: detail.previousId, direction: 'right' });
     } else if (result === 'right') {
       history.replace(`/photo-ablum/${detail?.nextId}`);
+      if (detail?.nextId) showAnimate({ id: detail.nextId, direction: 'left' });
     } else {
       history.push('/photo-ablum');
     }
   };
 
-  useEffect(getDetail, [getDetail]);
+  useEffect(() => {
+    GetDetail(id).then((res) => {
+      setDetail(res.data);
+      setAnimateDetail(res.data);
+    });
+  }, []);
 
   return detail ? (
     <>
@@ -45,10 +73,24 @@ const PhotoDetail = memo(() => {
         />
       </div>
       <div className={Style.CT}>
-        <div
-          className="ql-editor"
-          dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }}
-        />
+        <div className={Style.ct_swiper} ref={contentRef}>
+          {animateDetail && (
+            <div
+              className="ql-editor"
+              dangerouslySetInnerHTML={{ __html: decodeURIComponent(animateDetail.content) }}
+            />
+          )}
+          <div
+            className="ql-editor"
+            dangerouslySetInnerHTML={{ __html: decodeURIComponent(detail.content) }}
+          />
+          {animateDetail && (
+            <div
+              className="ql-editor"
+              dangerouslySetInnerHTML={{ __html: decodeURIComponent(animateDetail.content) }}
+            />
+          )}
+        </div>
       </div>
       <div className={Style.page_nate}>
         <PageNate

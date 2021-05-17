@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import IMAGE from '@src/assets/svg/image.svg';
 import IMAGE_ERROR from '@src/assets/svg/image-error.svg';
 
+import { AwaitTime } from '@src/helper/time';
+
 import Style from './index.module.less';
 
 type ImgProps = React.DetailedHTMLProps<
@@ -32,13 +34,6 @@ const Img = forwardRef<HTMLImageElement, ImgProps>((props, ref) => {
       const { current } = imgRef;
       const DomTransition = current.style.transition;
       const DomOpacity = current.style.opacity;
-
-      const AwaitTime = (time: number) =>
-        new Promise<void>((res) => {
-          setTimeout(() => {
-            res();
-          }, time);
-        });
 
       getImgBlob()
         .then((url) => {

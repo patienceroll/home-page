@@ -1,16 +1,30 @@
 .CT {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    min-height: 500px;
+  max-width: 1000px;
+  margin: 0 auto;
 
-    img {
-        max-width: 100%;
+  overflow: hidden;
+  background-color: #fff;
+  .ct_swiper {
+    display: flex;
+    width: 300%;
+    transition: transform ease 500ms;
+    transform: translateX(-33.33333333%);
+    :global {
+      .ql-editor {
+        min-height: 500px;
+        flex-shrink: 0;
+        width: 33.33333333%;
+        padding: 20px;
+      }
     }
+  }
+
+  img {
+    max-width: 100%;
+  }
 }
 
-.page_nate{
-    max-width: 400px;
-    margin: 0 auto;
+.page_nate {
+  max-width: 400px;
+  margin: 0 auto;
 }
