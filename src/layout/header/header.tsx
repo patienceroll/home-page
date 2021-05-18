@@ -13,7 +13,7 @@ const NavText: {
   home: '主页',
   'photo-ablum': '相册',
   'study-record': '学习记录',
-  'canvas-center': 'Canvas',
+  'canvas-center': '画布',
 };
 
 const Header = memo(() => {
