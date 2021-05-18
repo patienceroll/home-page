@@ -8,9 +8,8 @@ import { ReactComponent as CSDN } from '@src/assets/svg/csdn.svg';
 import Style from './aside.module.less';
 
 const Aside = memo(() => {
-  const {
-    state: { showAside },
-  } = useContext(LayoutContext);
+  const { getState } = useContext(LayoutContext);
+  const { showAside } = getState();
   return (
     <aside className={`${Style.contain} ${showAside ? '' : Style.hide}`}>
       <a

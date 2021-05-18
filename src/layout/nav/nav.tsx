@@ -8,9 +8,8 @@ import RouteData from '@src/route/route';
 import style from './nav.module.less';
 
 const Nav = memo(() => {
-  const {
-    state: { showNav },
-  } = useContext(LayoutContext);
+  const { getState } = useContext(LayoutContext);
+  const { showNav } = getState();
 
   const { pathname } = useLocation();
 

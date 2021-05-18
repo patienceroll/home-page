@@ -82,6 +82,9 @@ module.exports = {
       },
     ],
   },
+  externals: {
+    QMplayer: 'QMplayer',
+  },
   plugins: [
     // 复制文件夹
     new CopyWebpackPlugin({
@@ -100,7 +103,7 @@ module.exports = {
       title: 'patience',
       cdn: {
         css: [],
-        js: [],
+        js: ['https://y.gtimg.cn/music/h5/player/player.js?max_age=2592000'],
       },
     }),
     // 分离出 css 文件

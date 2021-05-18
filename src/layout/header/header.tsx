@@ -17,11 +17,9 @@ const NavText: {
 };
 
 const Header = memo(() => {
-  const {
-    state: { showNav, showAside },
-    setShowNav,
-    setShowAside,
-  } = useContext(LayoutContext);
+  const { getState, setShowNav, setShowAside } = useContext(LayoutContext);
+
+  const { showNav, showAside } = getState();
 
   const { pathname } = useLocation();
   /** 获取 pathname 的第一级 */

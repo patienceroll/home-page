@@ -11,9 +11,9 @@ import RouteData from '@src/route/route';
 import Style from './section.module.less';
 
 const Section = memo(() => {
-  const {
-    state: { showAside, showNav },
-  } = useContext(LayoutContext);
+  const { getState } = useContext(LayoutContext);
+
+  const { showNav, showAside } = getState();
 
   return (
     <section className={`${Style.CT}`}>

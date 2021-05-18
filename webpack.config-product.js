@@ -103,6 +103,7 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
     'react-router-dom': 'ReactRouterDOM',
+    QMplayer: 'QMplayer',
   },
   plugins: [
     // // 删除dist
@@ -117,6 +118,7 @@ module.exports = {
           'https://unpkg.com/react@17/umd/react.production.min.js',
           'https://unpkg.com/react-dom@17/umd/react-dom.production.min.js',
           'https://cdn.bootcdn.net/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js',
+          'https://y.gtimg.cn/music/h5/player/player.js?max_age=2592000',
         ],
       },
     }),

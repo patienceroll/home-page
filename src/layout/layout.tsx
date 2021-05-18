@@ -1,8 +1,9 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
 import LayoutContext from '@src/layout/context/context';
+import type { LayoutContextType } from '@src/layout/context/context';
 
 import Header from '@src/layout/header/header';
 import Nav from '@src/layout/nav/nav';
@@ -15,6 +16,8 @@ const Layout: FC = () => {
   const { pathname } = useLocation();
   const [showNav, setShowNav] = useState(false);
   const [showAside, setShowAside] = useState(false);
+
+  const QQplayerRef = useRef(new QMplayer({ target: 'web', loop: true }));
 
   useEffect(() => {
     if (showNav) setShowAside(false);
@@ -34,10 +37,18 @@ const Layout: FC = () => {
     setShowNav(false);
   };
 
+  const value: LayoutContextType = useMemo(() => {
+    return {
+      getState: () => ({ showAside, showNav, QQplayer: QQplayerRef.current }),
+      setShowNav,
+      setShowAside,
+    };
+  }, [showAside, showNav]);
+
   useEffect(ShowSection, [ShowSection, pathname]);
 
   return (
-    <LayoutContext.Provider value={{ state: { showAside, showNav }, setShowNav, setShowAside }}>
+    <LayoutContext.Provider value={value}>
       <Header />
       <Nav />
       <Section />
