@@ -75,6 +75,7 @@ const PhotoDetail = memo(() => {
         />
       </div>
       <div className={Style.CT}>
+        <h2 className={Style.title}>{detail.title}</h2>
         <div className={Style.ct_swiper} ref={contentRef}>
           {animateDetail && (
             <div

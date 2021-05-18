@@ -36,7 +36,7 @@ const RouteData: RouteTypeItem[] = [
     RouteProps: { path: '/study-record' },
   },
   {
-    name: 'canvas',
+    name: '画布',
     component: () => import(/**  webpackChunkName: "canvas-center"  */ '@src/page/canvas/canvas'),
 
     RouteProps: { path: '/canvas-center' },
