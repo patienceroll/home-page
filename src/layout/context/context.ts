@@ -1,10 +1,6 @@
 import { createContext } from 'react';
 
 export type LayoutContextType = {
-//   state: {
-//     showNav: boolean;
-//     showAside: boolean;
-//   };
   getState: () => {
     showNav: boolean;
     showAside: boolean;
