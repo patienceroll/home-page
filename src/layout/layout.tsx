@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ const Layout: FC = () => {
   const [showNav, setShowNav] = useState(false);
   const [showAside, setShowAside] = useState(false);
 
-  const QQplayerRef = useRef(new QMplayer({ target: 'web', loop: true }));
+  const [QQplayer] = useState(() => new QMplayer({ target: 'web', loop: true }));
 
   useEffect(() => {
     if (showNav) setShowAside(false);
@@ -39,7 +39,7 @@ const Layout: FC = () => {
 
   const value: LayoutContextType = useMemo(() => {
     return {
-      getState: () => ({ showAside, showNav, QQplayer: QQplayerRef.current }),
+      getState: () => ({ showAside, showNav, QQplayer }),
       setShowNav,
       setShowAside,
     };
