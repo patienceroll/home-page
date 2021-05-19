@@ -76,23 +76,7 @@ const warn = (text: string, time?: number) => showMessage({ text, time }, <Warn 
 
 const destoryAll = () => MessageMap.forEach((i, index) => destoryElement(i, index));
 
-const message = {
-  /** 成功消息 */
-  success,
-  /** 错误消息 */
-  error,
-  /** 禁止消息 */
-  prohibit,
-  /** 未知消息 */
-  unknow,
-  /** 警告消息 */
-  warn,
-  /** 清除所有 */
-  destoryAll,
-};
-
-export = {
-  default: message,
+export default {
   /** 成功消息 */
   success,
   /** 错误消息 */

@@ -5,6 +5,7 @@ declare module '*.svg' {
   export function ReactComponent(
     props: React.SVGProps<SVGAElement>,
   ): React.ReactElement<SVGAElement>;
+  export default String();
 }
 
 /** 当前播放状态 */

@@ -1,10 +1,12 @@
 import React, { memo, useContext, useEffect, useState } from 'react';
+import message from '@src/componets/message';
 
-import { ReactComponent as PLAY } from '@src/assets/svg/play.svg';
-import { ReactComponent as MUSIC } from '@src/assets/svg/music.svg';
-import { ReactComponent as NEXT } from '@src/assets/svg/next.svg';
-import { ReactComponent as PAUSE } from '@src/assets/svg/pause.svg';
-import { ReactComponent as PERVISE } from '@src/assets/svg/pervise.svg';
+import PLAY from '@src/assets/svg/play.svg';
+import MUSIC from '@src/assets/svg/music.svg';
+import NEXT from '@src/assets/svg/next.svg';
+import PAUSE from '@src/assets/svg/pause.svg';
+import PERVISE from '@src/assets/svg/pervise.svg';
+import MUSIC_LIST from '@src/assets/svg/music-list.svg';
 
 import LayoutContext from '@src/layout/context/context';
 
@@ -14,7 +16,7 @@ const MusicPlayer = memo(() => {
   const { getState } = useContext(LayoutContext);
   const { QQplayer } = getState();
 
-  const [paly, setPlay] = useState(false);
+  const [play, setPlay] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
 
   // 初始化播放器的事件
@@ -47,7 +49,8 @@ const MusicPlayer = memo(() => {
 
   const onClickPlay = () => {
     if (Object.keys(QQplayer.data.songs).length === 0) {
-      QQplayer.play(['003IPDsn4ZWb5H', '003PMR2c3ohl7o']);
+      // 1. 秘密 2. 关于我们之间的事
+      QQplayer.play(['003uIrW41da4ay', '004H5cUS2baA6O']);
     } else {
       QQplayer.play();
     }
@@ -69,6 +72,10 @@ const MusicPlayer = memo(() => {
     setShowIcon(true);
   };
 
+  const onClickShowList = () => {
+    message.prohibit('正在开发中哟~');
+  };
+
   useEffect(initPlayer, []);
 
   return (
@@ -79,14 +86,15 @@ const MusicPlayer = memo(() => {
         onMouseLeave={onMouseLeaveIcon}
         onMouseEnter={onMouseEnterIcon}
       >
-        <MUSIC className={paly ? 'rotate' : ''} />
-        <PERVISE onClick={onClickPervise} className={Style.action} />
-        {paly ? (
-          <PAUSE onClick={onClicjPause} className={Style.action} />
+        <img src={MUSIC} className={play ? 'rotate' : undefined} />
+        <img src={PERVISE} title="上一首" onClick={onClickPervise} className={Style.action} />
+        {play ? (
+          <img onClick={onClicjPause} title="暂停" src={PAUSE} className={Style.action} />
         ) : (
-          <PLAY onClick={onClickPlay} className={Style.action} />
+          <img onClick={onClickPlay} title="播放" src={PLAY} className={Style.action} />
         )}
-        <NEXT onClick={onClickNext} className={Style.action} />
+        <img src={NEXT} title="下一首" onClick={onClickNext} className={Style.action} />
+        <img src={MUSIC_LIST} title="播放列表" onClick={onClickShowList} className={Style.action} />
       </div>
       <div className={Style.music_player_pannel}></div>
     </>
