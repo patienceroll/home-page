@@ -13,6 +13,14 @@ type State = 'ready' | 'playing' | 'pause' | 'ended' | 'error';
 /** 播放方式 */
 type Target = 'auto' | 'music' | 'web';
 
+type EventName = 'play' | 'pause' | 'ended' | 'timeupdate' | 'waiting' | 'error';
+
+/**
+ *
+ * #### QQ 音乐 web Api 文档
+ * - https://xingqiao.gitbooks.io/qmplayer/content/
+ *
+ */
 declare class QMplayer {
   constructor(options?: { target?: Target; filter?: boolean; loop?: boolean }) {}
   state: State;
@@ -25,6 +33,7 @@ declare class QMplayer {
   pause: VoidFunction;
   playPrev: VoidFunction;
   playNext: VoidFunction;
-  on(eventName: string, callback: VoidFunction) {}
+  on(eventName: EventName, callback: VoidFunction) {}
+  off(eventName: EventName) {}
   toggle(play: boolean) {}
 }
