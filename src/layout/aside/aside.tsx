@@ -24,7 +24,7 @@ const Aside = memo(() => {
         </div>
       </a>
       <a
-        title="GitHub"
+        title="CSDN"
         className={Style.link}
         href="https://blog.csdn.net/qq_40653782"
         target="_blank"
