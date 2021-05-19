@@ -15,6 +15,7 @@ const MusicPlayer = memo(() => {
   const { QQplayer } = getState();
 
   const [paly, setPlay] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
 
   // 初始化播放器的事件
   const initPlayer = () => {
@@ -56,19 +57,36 @@ const MusicPlayer = memo(() => {
     QQplayer.pause();
   };
 
-  useEffect(initPlayer, []);
+  const onClickShowIcon = () => {
+    setShowIcon(true);
+  };
 
-  useEffect(() => {
-    console.log(QQplayer);
-  }, []);
+  const onMouseLeaveIcon = () => {
+    setShowIcon(false);
+  };
+
+  const onMouseEnterIcon = () => {
+    setShowIcon(true);
+  };
+
+  useEffect(initPlayer, []);
 
   return (
     <>
-      <div className={Style.music_player_icon}>
+      <div
+        className={`${Style.music_player_icon}  ${showIcon ? Style.show_icon : ''}`}
+        onClick={onClickShowIcon}
+        onMouseLeave={onMouseLeaveIcon}
+        onMouseEnter={onMouseEnterIcon}
+      >
         <MUSIC className={paly ? 'rotate' : ''} />
-        <PERVISE onClick={onClickPervise} />
-        {paly ? <PAUSE onClick={onClicjPause} /> : <PLAY onClick={onClickPlay} />}
-        <NEXT onClick={onClickNext} />
+        <PERVISE onClick={onClickPervise} className={Style.action} />
+        {paly ? (
+          <PAUSE onClick={onClicjPause} className={Style.action} />
+        ) : (
+          <PLAY onClick={onClickPlay} className={Style.action} />
+        )}
+        <NEXT onClick={onClickNext} className={Style.action} />
       </div>
       <div className={Style.music_player_pannel}></div>
     </>

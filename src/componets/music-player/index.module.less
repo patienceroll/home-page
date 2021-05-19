@@ -2,20 +2,33 @@
 
 .music_player_icon {
   position: fixed;
-  padding: 10px;
+  padding: 10px 0;
   top: 50%;
-  right: 8px;
   background-color: #fff;
+  right: 8px;
+  transform: translateX(calc(100% - 32px));
   display: flex;
   justify-content: space-between;
   border-radius: 8px;
   z-index: @max_z_index;
+  transition: transform ease 300ms;
   svg {
     flex-shrink: 0;
     margin: 0 5px;
     width: 30px;
     height: 30px;
+    transform-origin: center center;
   }
+  .action {
+    cursor: pointer;
+    :active {
+      transform: scale(0.9) !important;
+    }
+  }
+}
+
+.show_icon {
+  transform: none;
 }
 
 .music_player_pannel {
