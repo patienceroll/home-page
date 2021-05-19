@@ -26,10 +26,16 @@ declare class QMplayer {
   state: State;
   currentTime: number;
   duration: number;
-  data: { currentTime: number; duration: number; index: number; state: State };
+  data: {
+    currentTime: number;
+    duration: number;
+    index: number;
+    state: State;
+    songs: Record<number, any>;
+  };
   loop: boolean;
   target: number;
-  play(song: string | string[], options?: { index: number }) {}
+  play(song?: string | string[], options?: { index: number }) {}
   pause: VoidFunction;
   playPrev: VoidFunction;
   playNext: VoidFunction;

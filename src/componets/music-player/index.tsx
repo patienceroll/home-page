@@ -45,7 +45,15 @@ const MusicPlayer = memo(() => {
   };
 
   const onClickPlay = () => {
-    // QQplayer.play()
+    if (Object.keys(QQplayer.data.songs).length === 0) {
+      QQplayer.play(['003IPDsn4ZWb5H', '003PMR2c3ohl7o']);
+    } else {
+      QQplayer.play();
+    }
+  };
+
+  const onClicjPause = () => {
+    QQplayer.pause();
   };
 
   useEffect(initPlayer, []);
@@ -59,7 +67,7 @@ const MusicPlayer = memo(() => {
       <div className={Style.music_player_icon}>
         <MUSIC className={paly ? 'rotate' : ''} />
         <PERVISE onClick={onClickPervise} />
-        {paly ? <PAUSE /> : <PLAY />}
+        {paly ? <PAUSE onClick={onClicjPause} /> : <PLAY onClick={onClickPlay} />}
         <NEXT onClick={onClickNext} />
       </div>
       <div className={Style.music_player_pannel}></div>
