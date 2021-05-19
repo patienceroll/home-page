@@ -9,6 +9,7 @@ import Header from '@src/layout/header/header';
 import Nav from '@src/layout/nav/nav';
 import Section from '@src/layout/section/section';
 import Aside from '@src/layout/aside/aside';
+import MusicPlayer from '@src/componets/music-player';
 
 import Style from './layout.module.less';
 
@@ -57,6 +58,7 @@ const Layout: FC = () => {
         className={`${Style.mask} ${showAside || showNav ? Style.show : ''}`}
       />
       <Aside />
+      <MusicPlayer />
       <footer></footer>
     </LayoutContext.Provider>
   );

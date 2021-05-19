@@ -26,14 +26,14 @@ declare class QMplayer {
   state: State;
   currentTime: number;
   duration: number;
-  data: {};
+  data: { currentTime: number; duration: number; index: number; state: State };
   loop: boolean;
   target: number;
   play(song: string | string[], options?: { index: number }) {}
   pause: VoidFunction;
   playPrev: VoidFunction;
   playNext: VoidFunction;
-  on(eventName: EventName, callback: VoidFunction) {}
+  on(eventName: EventName, callback: (e?: unknown) => void) {}
   off(eventName: EventName) {}
   toggle(play: boolean) {}
 }

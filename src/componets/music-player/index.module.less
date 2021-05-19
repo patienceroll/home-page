@@ -1,8 +1,21 @@
+@import '~@src/theme/theme.less';
+
 .music_player_icon {
   position: fixed;
-  bottom: 20px;
-  right: 0;
+  padding: 10px;
+  top: 50%;
+  right: 8px;
   background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  z-index: @max_z_index;
+  svg {
+    flex-shrink: 0;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .music_player_pannel {
