@@ -5,7 +5,7 @@ import LayoutContext from '@src/layout/context/context';
 
 import RouteData from '@src/route/route';
 
-import style from './nav.module.less';
+import Style from './nav.module.less';
 
 const Nav = memo(() => {
   const { getState } = useContext(LayoutContext);
@@ -14,14 +14,22 @@ const Nav = memo(() => {
   const { pathname } = useLocation();
 
   return (
-    <nav className={`${style.contain} ${showNav ? '' : style.hide}`}>
+    <nav className={`${Style.contain} ${showNav ? '' : Style.hide}`}>
       {RouteData.map((item) => {
-        const { name, Linkprops = {}, RouteProps } = item;
-        const className = `${style.link} ${pathname === RouteProps.path ? style.link_current : ''}`;
+        const { name, Linkprops = {}, RouteProps, Icon } = item;
+        const className = `${Style.link} ${pathname === RouteProps.path ? Style.link_current : ''}`;
         if (name === undefined) return;
         return (
           <Link key={name} className={className} to={RouteProps.path} {...Linkprops}>
-            <div>{name}</div>
+            <div>
+              {Icon && (
+                <>
+                  <Icon className={Style.icon} />
+                  &emsp;
+                </>
+              )}
+              <span className={Style.text}>{name}</span>
+            </div>
           </Link>
         );
       })}

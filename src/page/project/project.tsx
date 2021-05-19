@@ -6,7 +6,7 @@ import ProjectBox from '@src/b-components/project/project-box';
 import * as Data from './data';
 import * as Request from './service';
 
-import Style from './home.module.less';
+import Style from './project.module.less';
 
 const Home: React.FC = memo(() => {
   const [list, setList] = useState<Data.ProjectItem[]>();

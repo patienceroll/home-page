@@ -10,8 +10,8 @@ import Style from './header.module.less';
 const NavText: {
   [key: string]: string;
 } = {
-  home: '主页',
-  'photo-ablum': '相册',
+  project: '项目',
+  'notes': '随记',
   'study-record': '学习记录',
   'canvas-center': '画布',
 };

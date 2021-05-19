@@ -11,7 +11,7 @@ import * as Data from '../data';
 
 import * as Request from '../service';
 
-import Style from './photo-detail.module.less';
+import Style from './index.module.less';
 
 const PhotoDetail = memo(() => {
   const { id } = useParams<{ id: string }>();
@@ -47,13 +47,13 @@ const PhotoDetail = memo(() => {
   const onChangePageNate: PageNateProps['onchange'] = (result) => {
     AwatiScrollTop().then(() => {
       if (result === 'left') {
-        history.replace(`/photo-ablum/${detail?.previousId}`);
+        history.replace(`/notes/${detail?.previousId}`);
         if (detail?.previousId) showAnimate({ id: detail.previousId, direction: 'right' });
       } else if (result === 'right') {
-        history.replace(`/photo-ablum/${detail?.nextId}`);
+        history.replace(`/notes/${detail?.nextId}`);
         if (detail?.nextId) showAnimate({ id: detail.nextId, direction: 'left' });
       } else {
-        history.push('/photo-ablum');
+        history.push('/notes');
       }
     });
   };
