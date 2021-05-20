@@ -33,4 +33,38 @@
 
 .music_player_pannel {
   position: fixed;
+  overflow: hidden;
+  border-radius: 18px;
+  background-color: #fff;
+  right: 8px;
+  transform: translate(calc(100% + 8px), -50%);
+  top: 50%;
+  z-index: @max_z_index;
+  transition: transform ease 300ms;
+  box-shadow: 0 2px 6px 1px #0000001f;
+}
+
+.show_pannel {
+  transform: translate(0, -50%);
+}
+
+
+.panner_inner {
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 20px;
+  padding: 18px 20px;
+}
+
+.panner_scroll {
+  position: relative;
+}
+
+.playing_wrapper {
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px 1px #0000001f;
+}
+.playing {
+  position: sticky;
+  top: 0;
 }

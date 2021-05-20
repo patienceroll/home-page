@@ -60,7 +60,7 @@ const showMessage = (option: Option, icon: React.ReactElement<SVGAElement>) => {
   render(<Message text={text} icon={icon} index={MessageMap.size} />, element);
 
   const promise = AwaitTime(watieTime).then(() => {
-    if (time !== 0) destoryElement(element, index);
+    if (time !== 0) return destoryElement(element, index);
   });
 
   const hide = () => destoryElement(element, index);
