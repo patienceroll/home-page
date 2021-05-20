@@ -7,6 +7,9 @@ import { ReactComponent as Error } from '@src/assets/svg/error.svg';
 import { ReactComponent as Prohibit } from '@src/assets/svg/prohibit.svg';
 import { ReactComponent as Unknow } from '@src/assets/svg/unknow.svg';
 import { ReactComponent as Warn } from '@src/assets/svg/warn.svg';
+import { ReactComponent as Notice } from '@src/assets/svg/notice.svg';
+
+import { AwaitTime } from '@src/helper/time';
 
 type Option = {
   time?: number;
@@ -48,12 +51,6 @@ const destoryElement = (element: HTMLElement, mapIndex: number) =>
       res();
     }
   });
-const WaitTime = (time: number) =>
-  new Promise<void>((res) => {
-    setTimeout(() => {
-      res();
-    }, time);
-  });
 
 const showMessage = (option: Option, icon: React.ReactElement<SVGAElement>) => {
   const { text, time } = option;
@@ -61,7 +58,15 @@ const showMessage = (option: Option, icon: React.ReactElement<SVGAElement>) => {
   const watieTime = (time || 3000) + 300;
   const [element, index] = createElement();
   render(<Message text={text} icon={icon} index={MessageMap.size} />, element);
-  return WaitTime(watieTime).then(() => destoryElement(element, index));
+
+  const promise = AwaitTime(watieTime).then(() => {
+    if (time !== 0) destoryElement(element, index);
+  });
+
+  const hide = () => destoryElement(element, index);
+  hide.promise = promise;
+  hide.then = (cb: (value?: any) => void) => promise.then(cb);
+  return hide;
 };
 
 const success = (text: string, time?: number) => showMessage({ text, time }, <Success />);
@@ -73,6 +78,8 @@ const prohibit = (text: string, time?: number) => showMessage({ text, time }, <P
 const unknow = (text: string, time?: number) => showMessage({ text, time }, <Unknow />);
 
 const warn = (text: string, time?: number) => showMessage({ text, time }, <Warn />);
+
+const notice = (text: string, time?: number) => showMessage({ text, time }, <Notice />);
 
 const destoryAll = () => MessageMap.forEach((i, index) => destoryElement(i, index));
 
@@ -87,6 +94,8 @@ export default {
   unknow,
   /** 警告消息 */
   warn,
+  /** 通知消息 */
+  notice,
   /** 清除所有 */
   destoryAll,
 };

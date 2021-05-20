@@ -27,8 +27,10 @@ const Message: FC<MessageProps> = ({ icon, text, index }) => {
 
   return (
     <div className={Style.ct} ref={element}>
-      <figure className={Style.icon}>{icon}</figure>
-      <span className={Style.text}>{text}</span>
+      <figure className={Style.icon}>
+        {icon}
+        <span className={Style.text}>{text}</span>
+      </figure>
     </div>
   );
 };

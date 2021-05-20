@@ -12,6 +12,13 @@ import LayoutContext from '@src/layout/context/context';
 
 import Style from './index.module.less';
 
+type Song = { mid: string; name: string; img?: string; time?: string; singer: string };
+
+const SONG_LIST: Song[] = [
+  { mid: '003uIrW41da4ay', name: '秘密', singer: '张震岳' },
+  { mid: '004H5cUS2baA6O', name: '关于我们之间的事', singer: '张震岳' },
+];
+
 const MusicPlayer = memo(() => {
   const { getState } = useContext(LayoutContext);
   const { QQplayer } = getState();
@@ -49,8 +56,7 @@ const MusicPlayer = memo(() => {
 
   const onClickPlay = () => {
     if (Object.keys(QQplayer.data.songs).length === 0) {
-      // 1. 秘密 2. 关于我们之间的事
-      QQplayer.play(['003uIrW41da4ay', '004H5cUS2baA6O']);
+      QQplayer.play(SONG_LIST.map((i) => i.mid));
     } else {
       QQplayer.play();
     }
@@ -73,13 +79,14 @@ const MusicPlayer = memo(() => {
   };
 
   const onClickShowList = () => {
-    message.prohibit('正在开发中哟~');
+    message.notice('正在开发中哟~', 3000);
   };
 
   useEffect(initPlayer, []);
 
   return (
     <>
+      {/* 微型音乐播放按钮 */}
       <div
         className={`${Style.music_player_icon}  ${showIcon ? Style.show_icon : ''}`}
         onClick={onClickShowIcon}
