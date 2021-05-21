@@ -142,22 +142,10 @@ module.exports = {
     }),
   ].concat(
     // 分析包
-    isAnalyse ? new BundleAnalyzerPlugin({ analyzerMode: 'static' }) : [],
+    isAnalyse ? new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }) : [],
   ),
 
   optimization: {
-    splitChunks: {
-      minChunks: 2,
-      cacheGroups: {
-        // 抽离出公用的业务代码
-        common: {
-          name: 'common~venders',
-          chunks: 'all',
-          minChunks: 2,
-          priority: 1,
-          reuseExistingChunk: true,
-        },
-      },
-    },
+    splitChunks: {},
   },
 };

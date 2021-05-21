@@ -1,5 +1,5 @@
 /** 相册列表项 */
-export type PhotoListItem = {
+export type NoteListItem = {
   /** 标题 */
   title: string;
   /** 日期 */
@@ -12,7 +12,7 @@ export type PhotoListItem = {
 };
 
 /** 详情 */
-type PhotoDetail = PhotoListItem & {
+type NoteDetail = NoteListItem & {
   /** 内容 被编码过 */
   content: string;
   /** 上一个数据的 id */

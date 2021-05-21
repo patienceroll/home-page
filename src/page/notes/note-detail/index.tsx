@@ -17,10 +17,10 @@ const PhotoDetail = memo(() => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
 
-  const [detail, setDetail] = useState<Data.PhotoDetail>();
+  const [detail, setDetail] = useState<Data.NoteDetail>();
 
   const contentRef = useRef<HTMLDivElement>(null);
-  const [animateDetail, setAnimateDetail] = useState<Data.PhotoDetail>();
+  const [animateDetail, setAnimateDetail] = useState<Data.NoteDetail>();
 
   const GetDetail = (id: number | string) => Request.GetPhoto({ id });
 

@@ -12,7 +12,7 @@ import Style from './index.module.less';
 const PhotoAblum: FC = memo(() => {
   const history = useHistory();
 
-  const [list, setList] = useState<Data.PhotoListItem[]>();
+  const [list, setList] = useState<Data.NoteListItem[]>();
 
   const getList = useCallback(() => {
     setList(undefined);

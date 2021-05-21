@@ -7,6 +7,7 @@ import NEXT from '@src/assets/svg/next.svg';
 import PAUSE from '@src/assets/svg/pause.svg';
 import PERVISE from '@src/assets/svg/pervise.svg';
 import MUSIC_LIST from '@src/assets/svg/music-list.svg';
+import { ReactComponent as ERROR } from '@src/assets/svg/error.svg';
 
 import LayoutContext from '@src/layout/context/context';
 
@@ -111,6 +112,10 @@ const MusicPlayer = memo(() => {
     setShowPanel(false);
   };
 
+  const onClickHidePanel = () => {
+    setShowPanel(false);
+  };
+
   const onClickPlayMusic = (music: string) => {
     const song = songList.find((i) => i.mid === music);
     if (song) {
@@ -173,6 +178,8 @@ const MusicPlayer = memo(() => {
             </div>
           </div>
         </div>
+
+        <ERROR className={Style.close} onClick={onClickHidePanel} />
       </div>
     </>
   );
