@@ -81,6 +81,7 @@ export const GetResponse = <T>(
       if (res.code === 0) {
         return res;
       }
+      message.error(res.msg);
       return res;
     })
     .catch((err) => {
@@ -115,6 +116,7 @@ export const PostResponse = <T>(
       if (res.code === 0) {
         return res;
       }
+      message.error(res.msg);
       return res;
     })
     .catch((err) => {

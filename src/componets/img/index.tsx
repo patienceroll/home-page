@@ -1,4 +1,4 @@
-import { FC, forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import React, { useState } from 'react';
 
 import IMAGE from '@src/assets/svg/image.svg';
@@ -15,7 +15,7 @@ type ImgProps = React.DetailedHTMLProps<
 
 const Img = forwardRef<HTMLImageElement, ImgProps>((props, ref) => {
   const { src } = props;
-  const [newSrc, setNewSrc] = useState<ImgProps['src']>(IMAGE as unknown as string);
+  const [newSrc, setNewSrc] = useState<ImgProps['src']>(IMAGE);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const getImgBlob = () => {
@@ -52,7 +52,7 @@ const Img = forwardRef<HTMLImageElement, ImgProps>((props, ref) => {
           current.style.transition = DomTransition;
         })
         .catch(() => {
-          setNewSrc(IMAGE_ERROR as unknown as string);
+          setNewSrc(IMAGE_ERROR);
         });
     }
   }, []);
